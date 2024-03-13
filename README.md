@@ -8,7 +8,7 @@ Autori
 ------
 
 Lorem ipsum
-- xlogin01 jmeno prijmeni 
+- xhrdinj00 Jan Hrdina
 - xlogin02 jmeno prijmeni 
 - xhomolj00 Jan Homolka 
 - xlogin04 jmeno prijmeni 
