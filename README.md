@@ -10,7 +10,7 @@ Autori
 Lorem ipsum
 - xlogin01 jmeno prijmeni 
 - xlogin02 jmeno prijmeni 
-- xhomolj00 Jan Homolka
+- xhomolj00 Jan Homolka 
 - xlogin04 jmeno prijmeni 
 
 Licence
