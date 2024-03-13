@@ -9,7 +9,7 @@ Autori
 
 Lorem ipsum
 - xhrdinj00 Jan Hrdina
-- xrousja00 Jan Rous  <3
+- xrousja00 Jan Rous  
 - xhomolj00 Jan Homolka 
 - xlogin04 jmeno prijmeni 
 
