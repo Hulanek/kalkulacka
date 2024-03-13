@@ -7,7 +7,7 @@ Windows 64bit
 Autori
 ------
 
-Nazev tymu
+Lorem ipsum
 - xlogin01 jmeno prijmeni 
 - xlogin02 jmeno prijmeni 
 - xlogin03 jmeno prijmeni 
