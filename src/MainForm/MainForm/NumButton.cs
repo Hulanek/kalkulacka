@@ -11,10 +11,10 @@ namespace MainForm
     public class NumButton : Button
     {
 
-        public float buttonValue = 0;
+        public double buttonValue = 0;
 
         [Category("CustomValue")]
-        public float ButtonValue
+        public double ButtonValue
         { 
             get { return buttonValue; }
 
