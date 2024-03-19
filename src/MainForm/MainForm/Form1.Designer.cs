@@ -49,7 +49,7 @@
             this.mainValueBox.Name = "mainValueBox";
             this.mainValueBox.ReadOnly = true;
             this.mainValueBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.mainValueBox.Size = new System.Drawing.Size(287, 38);
+            this.mainValueBox.Size = new System.Drawing.Size(764, 38);
             this.mainValueBox.TabIndex = 4;
             this.mainValueBox.Text = "0";
             // 
@@ -177,7 +177,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(348, 457);
+            this.ClientSize = new System.Drawing.Size(841, 457);
             this.Controls.Add(this.decPointButton);
             this.Controls.Add(this.numButton10);
             this.Controls.Add(this.numButton9);
