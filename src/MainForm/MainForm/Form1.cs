@@ -2,14 +2,12 @@
 
 using System;
 using System.Windows.Forms;
-
 /**
 * @file Form1.cs
 *
 * @brief Třída zpracovávající vstupy
 * @author Martin Konečný
 */
-
 
 
 /**
@@ -30,8 +28,13 @@ namespace MainForm
         //pro double je to 15
         public int maxNumOfDigits = 15; 
 
-        public double currentValue = 0;
+        public double lastValue = 0; //v operacích vystupuje jako první operand
+        public double currentValue = 0; // tato hodnota se zobrazuje v text boxu
+                                        // v operacích vystupuje jako druhý operand
+
         public string currentValueStr = "0";
+        OperationType currentOperation;
+        
 
         public Form1()
         {
@@ -40,9 +43,7 @@ namespace MainForm
         }
 
         /**
-        * Funkce pro detekci zmáčknutého tlačítka z GUI a získání jeho hodnoty
-        *
-        * @param value Hodnota, která se má přidat
+        * Funkce pro detekci zmáčknutého číselného tlačítka z GUI a získání jeho hodnoty
         */
         private void ValueButtonClick(object sender, EventArgs e)
         {
@@ -51,6 +52,20 @@ namespace MainForm
             AddValue(clickedValue);
         }
 
+        /**
+        * Funkce pro detekci zmáčknutého tlačítka s operací z GUI a získání jeho hodnoty (resp. operace)
+        */
+        private void OperationButtonClick(object sender, EventArgs e)
+        {
+            //execute operation ktera byla pred tim
+            OperationButton clickedButton = (OperationButton)(sender);
+            currentOperation = clickedButton.operation;
+            AddOperation();
+        }
+
+        /**
+        * Funkce pro detekci zmáčknutého tlačítka s desetinnou čárkou z GUI a získání jeho hodnoty (resp. operace)
+        */
         private void DecimalPointClick(object sender, EventArgs e)
         {
             if (!currentValueStr.Contains(","))
@@ -87,42 +102,29 @@ namespace MainForm
             }
         }
 
-
+        private void AddOperation()
+        {
+            lastValue = currentValue;
+            currentValue = 0;
+            if (currentOperation == OperationType.add)
+            {
+                //operationButton_add.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+                mainValueBox.Text = "+";
+            }
+            else if (currentOperation == OperationType.sub)
+            {
+                //operationButton_sub.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+                mainValueBox.Text = "-";
+            }
+        }
         /**
         * Funkce pro vypsání aktuální hodnoty
-        * 
         */
         private void PrintCurrentValue()
         {
             mainValueBox.Text = currentValueStr;
             currentValue = Convert.ToDouble(currentValueStr);
             label1.Text = currentValue.ToString();
-        }
-
-        private void OperationButtonClick(object sender, EventArgs e)
-        {
-            OperationButton clickedButton = (OperationButton)(sender);
-            OperationType operation = (OperationType)clickedButton.operation;
-
-
-
-            //na rychlo
-            if (operation == OperationType.add)
-            {
-                label1.Text = "+";
-            }
-            if (operation == OperationType.sub)
-            {
-                label1.Text = "-";
-            }
-            if (operation == OperationType.mul)
-            {
-                label1.Text = "*";
-            }
-            if (operation == OperationType.div)
-            {
-                label1.Text = "/";
-            }
         }
     }
 }

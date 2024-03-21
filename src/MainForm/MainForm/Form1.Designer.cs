@@ -30,6 +30,11 @@
         {
             this.mainValueBox = new System.Windows.Forms.TextBox();
             this.decPointButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.operationButton_div = new MainForm.OperationButton();
+            this.operationButton_mul = new MainForm.OperationButton();
+            this.operationButton_sub = new MainForm.OperationButton();
+            this.operationButton_add = new MainForm.OperationButton();
             this.numButton10 = new MainForm.NumButton();
             this.numButton9 = new MainForm.NumButton();
             this.numButton8 = new MainForm.NumButton();
@@ -40,11 +45,6 @@
             this.numButton3 = new MainForm.NumButton();
             this.numButton2 = new MainForm.NumButton();
             this.numButton1 = new MainForm.NumButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.operationButton_add = new MainForm.OperationButton();
-            this.operationButton_sub = new MainForm.OperationButton();
-            this.operationButton_div = new MainForm.OperationButton();
-            this.operationButton_mul = new MainForm.OperationButton();
             this.SuspendLayout();
             // 
             // mainValueBox
@@ -67,6 +67,59 @@
             this.decPointButton.Text = ",";
             this.decPointButton.UseVisualStyleBackColor = true;
             this.decPointButton.Click += new System.EventHandler(this.DecimalPointClick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 411);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 16);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "label1";
+            // 
+            // operationButton_div
+            // 
+            this.operationButton_div.Location = new System.Drawing.Point(235, 330);
+            this.operationButton_div.Name = "operationButton_div";
+            this.operationButton_div.Operation = OperationType.div;
+            this.operationButton_div.Size = new System.Drawing.Size(55, 60);
+            this.operationButton_div.TabIndex = 16;
+            this.operationButton_div.Text = "/";
+            this.operationButton_div.UseVisualStyleBackColor = true;
+            this.operationButton_div.Click += new System.EventHandler(this.OperationButtonClick);
+            // 
+            // operationButton_mul
+            // 
+            this.operationButton_mul.Location = new System.Drawing.Point(235, 264);
+            this.operationButton_mul.Name = "operationButton_mul";
+            this.operationButton_mul.Operation = OperationType.mul;
+            this.operationButton_mul.Size = new System.Drawing.Size(55, 60);
+            this.operationButton_mul.TabIndex = 15;
+            this.operationButton_mul.Text = "*";
+            this.operationButton_mul.UseVisualStyleBackColor = true;
+            this.operationButton_mul.Click += new System.EventHandler(this.OperationButtonClick);
+            // 
+            // operationButton_sub
+            // 
+            this.operationButton_sub.Location = new System.Drawing.Point(235, 198);
+            this.operationButton_sub.Name = "operationButton_sub";
+            this.operationButton_sub.Operation = OperationType.sub;
+            this.operationButton_sub.Size = new System.Drawing.Size(55, 60);
+            this.operationButton_sub.TabIndex = 14;
+            this.operationButton_sub.Text = "-";
+            this.operationButton_sub.UseVisualStyleBackColor = true;
+            this.operationButton_sub.Click += new System.EventHandler(this.OperationButtonClick);
+            // 
+            // operationButton_add
+            // 
+            this.operationButton_add.Location = new System.Drawing.Point(235, 132);
+            this.operationButton_add.Name = "operationButton_add";
+            this.operationButton_add.Operation = OperationType.add;
+            this.operationButton_add.Size = new System.Drawing.Size(55, 60);
+            this.operationButton_add.TabIndex = 13;
+            this.operationButton_add.Text = "+";
+            this.operationButton_add.UseVisualStyleBackColor = true;
+            this.operationButton_add.Click += new System.EventHandler(this.OperationButtonClick);
             // 
             // numButton10
             // 
@@ -178,59 +231,6 @@
             this.numButton1.UseVisualStyleBackColor = true;
             this.numButton1.Click += new System.EventHandler(this.ValueButtonClick);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 411);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 16);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "label1";
-            // 
-            // operationButton_add
-            // 
-            this.operationButton_add.Operation = OperationType.sub;
-            this.operationButton_add.Location = new System.Drawing.Point(235, 132);
-            this.operationButton_add.Name = "operationButton_add";
-            this.operationButton_add.Size = new System.Drawing.Size(55, 60);
-            this.operationButton_add.TabIndex = 13;
-            this.operationButton_add.Text = "+";
-            this.operationButton_add.UseVisualStyleBackColor = true;
-            this.operationButton_add.Click += new System.EventHandler(this.OperationButtonClick);
-            // 
-            // operationButton_sub
-            // 
-            this.operationButton_sub.Operation = OperationType.sub;
-            this.operationButton_sub.Location = new System.Drawing.Point(235, 198);
-            this.operationButton_sub.Name = "operationButton_sub";
-            this.operationButton_sub.Size = new System.Drawing.Size(55, 60);
-            this.operationButton_sub.TabIndex = 14;
-            this.operationButton_sub.Text = "-";
-            this.operationButton_sub.UseVisualStyleBackColor = true;
-            this.operationButton_sub.Click += new System.EventHandler(this.OperationButtonClick);
-            // 
-            // operationButton_div
-            // 
-            this.operationButton_div.Operation = OperationType.div;
-            this.operationButton_div.Location = new System.Drawing.Point(235, 330);
-            this.operationButton_div.Name = "operationButton_div";
-            this.operationButton_div.Size = new System.Drawing.Size(55, 60);
-            this.operationButton_div.TabIndex = 16;
-            this.operationButton_div.Text = "/";
-            this.operationButton_div.UseVisualStyleBackColor = true;
-            this.operationButton_div.Click += new System.EventHandler(this.OperationButtonClick);
-            // 
-            // operationButton_mul
-            // 
-            this.operationButton_mul.Operation = OperationType.mul;
-            this.operationButton_mul.Location = new System.Drawing.Point(235, 264);
-            this.operationButton_mul.Name = "operationButton_mul";
-            this.operationButton_mul.Size = new System.Drawing.Size(55, 60);
-            this.operationButton_mul.TabIndex = 15;
-            this.operationButton_mul.Text = "*";
-            this.operationButton_mul.UseVisualStyleBackColor = true;
-            this.operationButton_mul.Click += new System.EventHandler(this.OperationButtonClick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -256,6 +256,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
 
