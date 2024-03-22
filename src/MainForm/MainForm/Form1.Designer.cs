@@ -30,6 +30,11 @@
         {
             this.mainValueBox = new System.Windows.Forms.TextBox();
             this.decPointButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.operationButton_div = new MainForm.OperationButton();
+            this.operationButton_mul = new MainForm.OperationButton();
+            this.operationButton_sub = new MainForm.OperationButton();
+            this.operationButton_add = new MainForm.OperationButton();
             this.numButton10 = new MainForm.NumButton();
             this.numButton9 = new MainForm.NumButton();
             this.numButton8 = new MainForm.NumButton();
@@ -40,18 +45,20 @@
             this.numButton3 = new MainForm.NumButton();
             this.numButton2 = new MainForm.NumButton();
             this.numButton1 = new MainForm.NumButton();
+            this.equalButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainValueBox
             // 
             this.mainValueBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.mainValueBox.Location = new System.Drawing.Point(23, 34);
+            this.mainValueBox.Location = new System.Drawing.Point(23, 48);
             this.mainValueBox.Name = "mainValueBox";
             this.mainValueBox.ReadOnly = true;
             this.mainValueBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.mainValueBox.Size = new System.Drawing.Size(764, 38);
-            this.mainValueBox.TabIndex = 4;
+            this.mainValueBox.Size = new System.Drawing.Size(372, 38);
+            this.mainValueBox.TabIndex = 0;
             this.mainValueBox.Text = "0";
+            this.mainValueBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mainValueBox_KeyDown);
             // 
             // decPointButton
             // 
@@ -61,7 +68,60 @@
             this.decPointButton.TabIndex = 11;
             this.decPointButton.Text = ",";
             this.decPointButton.UseVisualStyleBackColor = true;
-            this.decPointButton.Click += new System.EventHandler(this.DecimalPointClick);
+            this.decPointButton.Click += new System.EventHandler(this.DecimalButtonClick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 411);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 16);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "label1";
+            // 
+            // operationButton_div
+            // 
+            this.operationButton_div.Location = new System.Drawing.Point(235, 330);
+            this.operationButton_div.Name = "operationButton_div";
+            this.operationButton_div.Operation = OperationType.div;
+            this.operationButton_div.Size = new System.Drawing.Size(55, 60);
+            this.operationButton_div.TabIndex = 16;
+            this.operationButton_div.Text = "/";
+            this.operationButton_div.UseVisualStyleBackColor = true;
+            this.operationButton_div.Click += new System.EventHandler(this.OperationButtonClick);
+            // 
+            // operationButton_mul
+            // 
+            this.operationButton_mul.Location = new System.Drawing.Point(235, 264);
+            this.operationButton_mul.Name = "operationButton_mul";
+            this.operationButton_mul.Operation = OperationType.mul;
+            this.operationButton_mul.Size = new System.Drawing.Size(55, 60);
+            this.operationButton_mul.TabIndex = 15;
+            this.operationButton_mul.Text = "*";
+            this.operationButton_mul.UseVisualStyleBackColor = true;
+            this.operationButton_mul.Click += new System.EventHandler(this.OperationButtonClick);
+            // 
+            // operationButton_sub
+            // 
+            this.operationButton_sub.Location = new System.Drawing.Point(235, 198);
+            this.operationButton_sub.Name = "operationButton_sub";
+            this.operationButton_sub.Operation = OperationType.sub;
+            this.operationButton_sub.Size = new System.Drawing.Size(55, 60);
+            this.operationButton_sub.TabIndex = 14;
+            this.operationButton_sub.Text = "-";
+            this.operationButton_sub.UseVisualStyleBackColor = true;
+            this.operationButton_sub.Click += new System.EventHandler(this.OperationButtonClick);
+            // 
+            // operationButton_add
+            // 
+            this.operationButton_add.Location = new System.Drawing.Point(235, 132);
+            this.operationButton_add.Name = "operationButton_add";
+            this.operationButton_add.Operation = OperationType.add;
+            this.operationButton_add.Size = new System.Drawing.Size(55, 60);
+            this.operationButton_add.TabIndex = 13;
+            this.operationButton_add.Text = "+";
+            this.operationButton_add.UseVisualStyleBackColor = true;
+            this.operationButton_add.Click += new System.EventHandler(this.OperationButtonClick);
             // 
             // numButton10
             // 
@@ -173,11 +233,27 @@
             this.numButton1.UseVisualStyleBackColor = true;
             this.numButton1.Click += new System.EventHandler(this.ValueButtonClick);
             // 
+            // equalButton
+            // 
+            this.equalButton.Location = new System.Drawing.Point(296, 330);
+            this.equalButton.Name = "equalButton";
+            this.equalButton.Size = new System.Drawing.Size(55, 60);
+            this.equalButton.TabIndex = 17;
+            this.equalButton.Text = "=";
+            this.equalButton.UseVisualStyleBackColor = true;
+            this.equalButton.Click += new System.EventHandler(this.EqualButtonClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(841, 457);
+            this.ClientSize = new System.Drawing.Size(457, 457);
+            this.Controls.Add(this.equalButton);
+            this.Controls.Add(this.operationButton_div);
+            this.Controls.Add(this.operationButton_mul);
+            this.Controls.Add(this.operationButton_sub);
+            this.Controls.Add(this.operationButton_add);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.decPointButton);
             this.Controls.Add(this.numButton10);
             this.Controls.Add(this.numButton9);
@@ -211,6 +287,12 @@
         private NumButton numButton7;
         private NumButton numButton10;
         private System.Windows.Forms.Button decPointButton;
+        private System.Windows.Forms.Label label1;
+        private OperationButton operationButton_add;
+        private OperationButton operationButton_sub;
+        private OperationButton operationButton_div;
+        private OperationButton operationButton_mul;
+        private System.Windows.Forms.Button equalButton;
     }
 }
 
