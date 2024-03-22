@@ -31,10 +31,12 @@ namespace MainForm
         public double lastValue = 0; //v operacích vystupuje jako první operand
         public double currentValue = 0; // tato hodnota se zobrazuje v text boxu
                                         // v operacích vystupuje jako druhý operand
-
         public string currentValueStr = "0";
-        OperationType currentOperation;
         
+        OperationType currentOperation;
+        OperationType lastOperation;
+
+        static Operations operations = new Operations();
 
         public Form1()
         {
@@ -57,8 +59,8 @@ namespace MainForm
         */
         private void OperationButtonClick(object sender, EventArgs e)
         {
-            //execute operation ktera byla pred tim
             OperationButton clickedButton = (OperationButton)(sender);
+            lastOperation = currentOperation;
             currentOperation = clickedButton.operation;
             AddOperation();
         }
@@ -66,13 +68,26 @@ namespace MainForm
         /**
         * Funkce pro detekci zmáčknutého tlačítka s desetinnou čárkou z GUI a získání jeho hodnoty (resp. operace)
         */
-        private void DecimalPointClick(object sender, EventArgs e)
+        private void DecimalButtonClick(object sender, EventArgs e)
         {
             if (!currentValueStr.Contains(","))
             {
                 currentValueStr += ",";
             }
             PrintCurrentValue();
+        }
+
+        /**
+        * Funkce pro detekci zmáčknutí tlačítka rovnosti z GUI a získání jeho hodnoty (resp. operace)
+        */
+        public void EqualButtonClick(object sender, EventArgs e)
+        {
+            //nutno přidat ošetření na vícenásobné zmáčknutí
+
+            ExecuteOperation(currentOperation);
+            PrintResult();
+
+            label1.Text = "cV = " + currentValueStr + "lV = " + lastValue + "cO = " + currentOperation + "lO = " + lastOperation;
         }
 
         /**
@@ -91,7 +106,7 @@ namespace MainForm
                 else
                 { 
                     currentValueStr += value.ToString();
-                    //pridani pozadovane hodnoty jako koncovou cifru
+                    //přidání požadované hodnoty jako poslední cifru
                 }
                 PrintCurrentValue();
             }
@@ -102,10 +117,16 @@ namespace MainForm
             }
         }
 
+        /**
+        * Funkce pro nastavení a zobrazení operace k provedení
+        * Pokud je před touto operací potřeba provést operaci předcházející, provede ji
+        */
         private void AddOperation()
         {
-            lastValue = currentValue;
-            currentValue = 0;
+            //provede předcházející operaci
+            ExecuteOperation(lastOperation);
+
+
             if (currentOperation == OperationType.add)
             {
                 //operationButton_add.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
@@ -117,6 +138,26 @@ namespace MainForm
                 mainValueBox.Text = "-";
             }
         }
+
+        /**
+        * Funkce pro vykonání operace
+        * Funkce pracuje s instancí matematické třídy Operations
+        * @param operation Operace, která se má vykonat
+        */
+        public void ExecuteOperation(OperationType operation)
+        {
+            if (operation == OperationType.add)
+            {
+                currentValue = operations.Add(lastValue, currentValue);
+            }
+            else if (operation == OperationType.sub)
+            {
+                currentValue = operations.Sub(lastValue, currentValue);
+            }
+            lastValue = currentValue;
+            currentValue = 0;
+        }
+
         /**
         * Funkce pro vypsání aktuální hodnoty
         */
@@ -124,7 +165,14 @@ namespace MainForm
         {
             mainValueBox.Text = currentValueStr;
             currentValue = Convert.ToDouble(currentValueStr);
-            label1.Text = currentValue.ToString();
+        }
+
+        /**
+        * Funkce pro vypsání výsledku - lastValue
+        */
+        private void PrintResult()
+        {
+            mainValueBox.Text = lastValue.ToString();
         }
     }
 }

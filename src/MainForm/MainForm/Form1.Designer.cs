@@ -45,6 +45,7 @@
             this.numButton3 = new MainForm.NumButton();
             this.numButton2 = new MainForm.NumButton();
             this.numButton1 = new MainForm.NumButton();
+            this.equalButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainValueBox
@@ -55,8 +56,9 @@
             this.mainValueBox.ReadOnly = true;
             this.mainValueBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.mainValueBox.Size = new System.Drawing.Size(372, 38);
-            this.mainValueBox.TabIndex = 4;
+            this.mainValueBox.TabIndex = 0;
             this.mainValueBox.Text = "0";
+            this.mainValueBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mainValueBox_KeyDown);
             // 
             // decPointButton
             // 
@@ -66,7 +68,7 @@
             this.decPointButton.TabIndex = 11;
             this.decPointButton.Text = ",";
             this.decPointButton.UseVisualStyleBackColor = true;
-            this.decPointButton.Click += new System.EventHandler(this.DecimalPointClick);
+            this.decPointButton.Click += new System.EventHandler(this.DecimalButtonClick);
             // 
             // label1
             // 
@@ -231,11 +233,22 @@
             this.numButton1.UseVisualStyleBackColor = true;
             this.numButton1.Click += new System.EventHandler(this.ValueButtonClick);
             // 
+            // equalButton
+            // 
+            this.equalButton.Location = new System.Drawing.Point(296, 330);
+            this.equalButton.Name = "equalButton";
+            this.equalButton.Size = new System.Drawing.Size(55, 60);
+            this.equalButton.TabIndex = 17;
+            this.equalButton.Text = "=";
+            this.equalButton.UseVisualStyleBackColor = true;
+            this.equalButton.Click += new System.EventHandler(this.EqualButtonClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(457, 457);
+            this.Controls.Add(this.equalButton);
             this.Controls.Add(this.operationButton_div);
             this.Controls.Add(this.operationButton_mul);
             this.Controls.Add(this.operationButton_sub);
@@ -256,7 +269,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,6 +292,7 @@
         private OperationButton operationButton_sub;
         private OperationButton operationButton_div;
         private OperationButton operationButton_mul;
+        private System.Windows.Forms.Button equalButton;
     }
 }
 
