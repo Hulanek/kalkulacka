@@ -58,7 +58,6 @@
             this.mainValueBox.Size = new System.Drawing.Size(372, 38);
             this.mainValueBox.TabIndex = 0;
             this.mainValueBox.Text = "0";
-            this.mainValueBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mainValueBox_KeyDown);
             // 
             // decPointButton
             // 
