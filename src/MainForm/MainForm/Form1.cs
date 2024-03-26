@@ -60,9 +60,7 @@ namespace MainForm
         private void OperationButtonClick(object sender, EventArgs e)
         {
             OperationButton clickedButton = (OperationButton)(sender);
-            lastOperation = currentOperation;
-            currentOperation = clickedButton.operation;
-            AddOperation();
+            AddOperation(clickedButton.operation);
         }
 
         /**
@@ -82,12 +80,11 @@ namespace MainForm
         */
         public void EqualButtonClick(object sender, EventArgs e)
         {
-            //nutno přidat ošetření na vícenásobné zmáčknutí
-
             ExecuteOperation(currentOperation);
             PrintResult();
 
-            label1.Text = "cV = " + currentValueStr + "lV = " + lastValue + "cO = " + currentOperation + "lO = " + lastOperation;
+            //testovací label
+            label1.Text = "cV = " + currentValue.ToString() + "lV = " + lastValue + "cO = " + currentOperation + "lO = " + lastOperation;
         }
 
         /**
@@ -120,9 +117,12 @@ namespace MainForm
         /**
         * Funkce pro nastavení a zobrazení operace k provedení
         * Pokud je před touto operací potřeba provést operaci předcházející, provede ji
+        * @param operationToAdd Operace, která se má přidat
         */
-        private void AddOperation()
+        private void AddOperation(OperationType operationToAdd)
         {
+            lastOperation = currentOperation;
+            currentOperation = operationToAdd;
             //provede předcházející operaci
             ExecuteOperation(lastOperation);
 
@@ -173,6 +173,36 @@ namespace MainForm
         private void PrintResult()
         {
             mainValueBox.Text = lastValue.ToString();
+        }
+
+
+        /**
+        * Funkce pro detekci stisknutých tlačítek na klávesnici
+        */
+        private void KeyPressEvent(object sender, KeyPressEventArgs e)
+        {
+            char pressedChar = e.KeyChar;
+
+            if (pressedChar >= '0' && pressedChar <= '9')
+            {
+                double value = (double)(pressedChar - '0');
+                AddValue(value);
+            }
+            else if (pressedChar == '+')
+            {
+                AddOperation(OperationType.add);
+            }
+            else if (pressedChar == '-')
+            {
+                AddOperation(OperationType.sub);
+            }
+            //tady dalsi operace
+
+            else if (pressedChar == '=')
+            {
+                ExecuteOperation(currentOperation);
+                PrintResult();
+            }
         }
     }
 }

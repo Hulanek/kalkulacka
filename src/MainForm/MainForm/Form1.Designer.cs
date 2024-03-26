@@ -31,6 +31,7 @@
             this.mainValueBox = new System.Windows.Forms.TextBox();
             this.decPointButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.equalButton = new System.Windows.Forms.Button();
             this.operationButton_div = new MainForm.OperationButton();
             this.operationButton_mul = new MainForm.OperationButton();
             this.operationButton_sub = new MainForm.OperationButton();
@@ -45,7 +46,6 @@
             this.numButton3 = new MainForm.NumButton();
             this.numButton2 = new MainForm.NumButton();
             this.numButton1 = new MainForm.NumButton();
-            this.equalButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainValueBox
@@ -74,9 +74,19 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(20, 411);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 16);
+            this.label1.Size = new System.Drawing.Size(94, 16);
             this.label1.TabIndex = 12;
-            this.label1.Text = "label1";
+            this.label1.Text = "testovaci label";
+            // 
+            // equalButton
+            // 
+            this.equalButton.Location = new System.Drawing.Point(296, 330);
+            this.equalButton.Name = "equalButton";
+            this.equalButton.Size = new System.Drawing.Size(55, 60);
+            this.equalButton.TabIndex = 17;
+            this.equalButton.Text = "=";
+            this.equalButton.UseVisualStyleBackColor = true;
+            this.equalButton.Click += new System.EventHandler(this.EqualButtonClick);
             // 
             // operationButton_div
             // 
@@ -232,16 +242,6 @@
             this.numButton1.UseVisualStyleBackColor = true;
             this.numButton1.Click += new System.EventHandler(this.ValueButtonClick);
             // 
-            // equalButton
-            // 
-            this.equalButton.Location = new System.Drawing.Point(296, 330);
-            this.equalButton.Name = "equalButton";
-            this.equalButton.Size = new System.Drawing.Size(55, 60);
-            this.equalButton.TabIndex = 17;
-            this.equalButton.Text = "=";
-            this.equalButton.UseVisualStyleBackColor = true;
-            this.equalButton.Click += new System.EventHandler(this.EqualButtonClick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -266,8 +266,10 @@
             this.Controls.Add(this.numButton1);
             this.Controls.Add(this.mainValueBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPressEvent);
             this.ResumeLayout(false);
             this.PerformLayout();
 
