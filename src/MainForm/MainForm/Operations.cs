@@ -39,5 +39,30 @@ namespace MainForm
         {
             return num1 - num2;
         }
+
+
+        /**
+        * Funkce pro rozdíl dvou čísel
+        * 
+        * @param num1 První operand pro operaci - dělenec
+        * @param num2 Druhý operand pro operaci - dělitel
+        * @return Vrací výsledek operace - podíl
+        */
+        public double Div(double num1, double num2)
+        {
+            return num1 / num2;
+        }
+
+        /**
+        * Funkce pro součin dvou čísel
+        * 
+        * @param num1 První operand pro operaci - činitel
+        * @param num2 Druhý operand pro operaci - činitel
+        * @return Vrací výsledek operace - součin
+        */
+        public double Mul(double num1, double num2)
+        {
+            return num1 * num2;
+        }
     }
 }
