@@ -82,9 +82,9 @@ namespace MainForm
         {
             ExecuteOperation(currentOperation);
             PrintResult();
-
             //testovací label
             label1.Text = "cV = " + currentValue.ToString() + "lV = " + lastValue + "cO = " + currentOperation + "lO = " + lastOperation;
+
         }
 
         /**
@@ -129,13 +129,19 @@ namespace MainForm
 
             if (currentOperation == OperationType.add)
             {
-                //operationButton_add.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
                 mainValueBox.Text = "+";
             }
             else if (currentOperation == OperationType.sub)
             {
-                //operationButton_sub.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
                 mainValueBox.Text = "-";
+            }
+            else if (currentOperation == OperationType.div)
+            {
+                mainValueBox.Text = "÷";
+            }
+            else if (currentOperation == OperationType.mul)
+            {
+                mainValueBox.Text = "*";
             }
         }
 
@@ -153,6 +159,15 @@ namespace MainForm
             else if (operation == OperationType.sub)
             {
                 currentValue = operations.Sub(lastValue, currentValue);
+            }
+            else if (operation == OperationType.div)
+            {
+                //nutno dodat exception na dělení nulou
+                currentValue = operations.Div(lastValue, currentValue);
+            }
+            else if (operation == OperationType.mul)
+            {
+                currentValue = operations.Mul(lastValue, currentValue);
             }
             lastValue = currentValue;
             currentValue = 0;
@@ -195,6 +210,14 @@ namespace MainForm
             else if (pressedChar == '-')
             {
                 AddOperation(OperationType.sub);
+            }
+            else if (pressedChar == '/')
+            {
+                AddOperation(OperationType.div);
+            }
+            else if (pressedChar == '*')
+            {
+                AddOperation(OperationType.mul);
             }
             //tady dalsi operace
 
