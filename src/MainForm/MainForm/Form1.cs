@@ -19,6 +19,18 @@ public enum OperationType
     add, sub, div, mul
 }
 
+/**
+* Enum obsahující aktuální stav
+* aktuální stav odpovídá zobrazované položce v hlavním okně
+*/
+public enum CurrentState
+{ 
+    number, //stav při zadávání hodnoty
+    operation, //stav při zadávání operace
+    result, //stav při výpisu výsledku
+    error //stav při výpisu chyby
+}
+
 namespace MainForm
 {
 
@@ -26,21 +38,41 @@ namespace MainForm
     {
         //maximalni pocet cifer ktere muze cislo obsahovat
         //pro double je to 15
-        public int maxNumOfDigits = 15; 
+        public int maxNumOfDigits = 15;
+        public double maxDisplayableVal = 999999999999999; //maximální hodnota pro 15 cifer
 
-        public double lastValue = 0; //v operacích vystupuje jako první operand
-        public double currentValue = 0; // tato hodnota se zobrazuje v text boxu
-                                        // v operacích vystupuje jako druhý operand
-        public string currentValueStr = "0";
+
+        public double lastValue; //v operacích vystupuje jako první operand
+        public double currentValue; // tato hodnota se zobrazuje v text boxu
+                                    // v operacích vystupuje jako druhý operand
+        public string currentValueStr;
         
         OperationType currentOperation;
         OperationType lastOperation;
 
         static Operations operations = new Operations();
+        static CurrentState currentState = new CurrentState();
+
+        string errorMessage = "";
 
         public Form1()
         {
             InitializeComponent();
+            PrintCurrentValue();
+            ResetValues();
+        }
+
+        /**
+        * Funkce pro resetování hodnot do základního stavu
+        */
+        public void ResetValues()
+        {
+            currentState = CurrentState.number;
+            currentOperation = OperationType.add;
+            lastOperation = OperationType.add;
+            lastValue = 0;
+            currentValue = 0;
+            currentValueStr = "0";
             PrintCurrentValue();
         }
 
@@ -68,11 +100,7 @@ namespace MainForm
         */
         private void DecimalButtonClick(object sender, EventArgs e)
         {
-            if (!currentValueStr.Contains(","))
-            {
-                currentValueStr += ",";
-            }
-            PrintCurrentValue();
+            AddDecimal();
         }
 
         /**
@@ -80,11 +108,7 @@ namespace MainForm
         */
         public void EqualButtonClick(object sender, EventArgs e)
         {
-            ExecuteOperation(currentOperation);
-            PrintResult();
-            //testovací label
-            label1.Text = "cV = " + currentValue.ToString() + "lV = " + lastValue + "cO = " + currentOperation + "lO = " + lastOperation;
-
+            Result();
         }
 
         /**
@@ -94,9 +118,19 @@ namespace MainForm
         */
         private void AddValue(double value)
         {
+            if (currentState == CurrentState.result || currentState == CurrentState.error)//nový výpočet po zobrazení výsledku nebo chyby
+            {
+                ResetValues();
+            }
+            
+            if (currentState != CurrentState.number)//vynulovaní string hodnoty pokud napíšeme první číslici
+            {
+                currentValueStr = "0";
+            }
+
             if (currentValueStr.Length < maxNumOfDigits)
             {
-                if (currentValue == 0)
+                if (currentValueStr == "0")
                 {
                     currentValueStr = value.ToString();
                 }
@@ -106,11 +140,33 @@ namespace MainForm
                     //přidání požadované hodnoty jako poslední cifru
                 }
                 PrintCurrentValue();
+                currentValue = Convert.ToDouble(currentValueStr);
             }
             else
             { 
                 //presahnuto dovoleny pocet cifer
                 //nejakym zpuobem vypis chyby
+            }
+            currentState = CurrentState.number;
+        }
+
+        /**
+        * Funkce pro přidání desetinné čárky 
+        */
+        private void AddDecimal()
+        {
+            if (currentState == CurrentState.number)
+            {
+                if (!currentValueStr.Contains(","))
+                {
+                    currentValueStr += ",";
+                }
+                PrintCurrentValue();
+            }
+            else
+            { 
+                //pokud chceme pridat desetinnou carku po zadani operace
+                //  bud chyba nebo se nestane nic
             }
         }
 
@@ -121,11 +177,23 @@ namespace MainForm
         */
         private void AddOperation(OperationType operationToAdd)
         {
-            lastOperation = currentOperation;
-            currentOperation = operationToAdd;
-            //provede předcházející operaci
-            ExecuteOperation(lastOperation);
+            if (currentState == CurrentState.error)//při zobrazení erroru nelze zadat operace
+            {
+                return;
+            }
+            if (currentState == CurrentState.number)
+            {
+                if (ExecuteOperation(lastOperation))//provedení předcházející operace
+                {
+                    lastOperation = currentOperation;
+                }
+                else
+                {
+                    return;
+                }
+            }
 
+            currentOperation = operationToAdd;
 
             if (currentOperation == OperationType.add)
             {
@@ -137,21 +205,24 @@ namespace MainForm
             }
             else if (currentOperation == OperationType.div)
             {
-                mainValueBox.Text = "÷";
+                mainValueBox.Text = "/";
             }
             else if (currentOperation == OperationType.mul)
             {
                 mainValueBox.Text = "*";
             }
+            currentState = CurrentState.operation;
         }
 
         /**
         * Funkce pro vykonání operace
         * Funkce pracuje s instancí matematické třídy Operations
         * @param operation Operace, která se má vykonat
+        * @return if execution was successful
         */
-        public void ExecuteOperation(OperationType operation)
+        public bool ExecuteOperation(OperationType operation)
         {
+
             if (operation == OperationType.add)
             {
                 currentValue = operations.Add(lastValue, currentValue);
@@ -162,15 +233,24 @@ namespace MainForm
             }
             else if (operation == OperationType.div)
             {
-                //nutno dodat exception na dělení nulou
                 currentValue = operations.Div(lastValue, currentValue);
             }
             else if (operation == OperationType.mul)
             {
                 currentValue = operations.Mul(lastValue, currentValue);
             }
+
+            if (currentValue > maxDisplayableVal || currentValue < -maxDisplayableVal)
+            {
+                currentState = CurrentState.error;
+                errorMessage = "Přetečení";
+                PrintErrorMessage();
+                return false;
+            }
+
             lastValue = currentValue;
             currentValue = 0;
+            return true;
         }
 
         /**
@@ -179,29 +259,60 @@ namespace MainForm
         private void PrintCurrentValue()
         {
             mainValueBox.Text = currentValueStr;
-            currentValue = Convert.ToDouble(currentValueStr);
         }
+
+        /**
+        * Funkce pro vypsání chyby
+        */
+        private void PrintErrorMessage()
+        {
+            mainValueBox.Text = errorMessage;
+        }
+
 
         /**
         * Funkce pro vypsání výsledku - lastValue
         */
-        private void PrintResult()
+        private void Result()
         {
-            mainValueBox.Text = lastValue.ToString();
+            if (currentState == CurrentState.number)
+            {
+                if (ExecuteOperation(currentOperation))
+                {
+                    mainValueBox.Text = lastValue.ToString();
+                    currentState = CurrentState.result;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else if (currentState == CurrentState.operation)
+            {
+                currentState = CurrentState.error;
+                errorMessage = "Neplatný formát";
+                PrintErrorMessage();
+            }
         }
-
 
         /**
         * Funkce pro detekci stisknutých tlačítek na klávesnici
         */
         private void KeyPressEvent(object sender, KeyPressEventArgs e)
         {
+            //testovací label
+            label1.Text = "cV = " + currentValue.ToString() + "lV = " + lastValue + "cO = " + currentOperation + "lO = " + lastOperation + currentState.ToString();
+
             char pressedChar = e.KeyChar;
 
             if (pressedChar >= '0' && pressedChar <= '9')
             {
                 double value = (double)(pressedChar - '0');
                 AddValue(value);
+            }
+            else if (pressedChar == ',')
+            {
+                AddDecimal();
             }
             else if (pressedChar == '+')
             {
@@ -223,8 +334,7 @@ namespace MainForm
 
             else if (pressedChar == '=')
             {
-                ExecuteOperation(currentOperation);
-                PrintResult();
+                Result();
             }
         }
     }
