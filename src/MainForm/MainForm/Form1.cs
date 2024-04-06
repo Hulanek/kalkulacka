@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 /**
 * Enum obsahující všechny matematické operace.
-* Sčítání, odčítání, dělení, násobení
+* Sčítání, odčítání, dělení, násobení, umocňování, obecná odmocnina
 */
 public enum OperationType
 {
-    add, sub, div, mul
+    add, sub, div, mul, exp, sqr
 }
 
 /**
@@ -211,6 +211,14 @@ namespace MainForm
             {
                 mainValueBox.Text = "*";
             }
+            else if (currentOperation == OperationType.exp)
+            {
+                mainValueBox.Text = "^";
+            }
+            else if (currentOperation == OperationType.sqr)
+            {
+                mainValueBox.Text = "√";
+            }
             currentState = CurrentState.operation;
         }
 
@@ -239,6 +247,35 @@ namespace MainForm
             {
                 currentValue = operations.Mul(lastValue, currentValue);
             }
+            else if (operation == OperationType.exp)
+            {
+                if(currentValue % 1 == 0 && currentValue >= 0)//kontrola zda je exponent prirozene cislo
+                { 
+                    currentValue = operations.Exp(lastValue, currentValue);
+                }
+                else
+                { 
+                    currentState = CurrentState.error;
+                    errorMessage = "Exponent musí být přirozený";
+                    PrintErrorMessage();
+                    return false;
+                }
+            }
+            else if (operation == OperationType.sqr)
+            {
+                if(lastValue % 1 == 0 && lastValue >= 0)//kontrola zda je exponent prirozene cislo
+                { 
+                    currentValue = operations.Sqr(lastValue, currentValue);
+                }
+                else
+                { 
+                    currentState = CurrentState.error;
+                    errorMessage = "Exponent musí být přirozený";
+                    PrintErrorMessage();
+                    return false;
+                }
+            }
+
 
             if (currentValue > maxDisplayableVal || currentValue < -maxDisplayableVal)
             {
@@ -330,6 +367,14 @@ namespace MainForm
             {
                 AddOperation(OperationType.mul);
             }
+            else if (pressedChar == '^')
+            {
+                AddOperation(OperationType.exp);
+            }
+            //else if (pressedChar == "char ktery reprezentuje odmocninu")
+            //{
+            //    AddOperation(OperationType.sqr);
+            //}
             //tady dalsi operace
 
             else if (pressedChar == '=')

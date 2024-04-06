@@ -32,6 +32,8 @@
             this.decPointButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.equalButton = new System.Windows.Forms.Button();
+            this.operationButton_exp = new MainForm.OperationButton();
+            this.operationButton_sqr = new MainForm.OperationButton();
             this.operationButton_div = new MainForm.OperationButton();
             this.operationButton_mul = new MainForm.OperationButton();
             this.operationButton_sub = new MainForm.OperationButton();
@@ -56,7 +58,7 @@
             this.mainValueBox.ReadOnly = true;
             this.mainValueBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.mainValueBox.Size = new System.Drawing.Size(372, 38);
-            this.mainValueBox.TabIndex = 0;
+            this.mainValueBox.TabIndex = 5;
             this.mainValueBox.Text = "0";
             // 
             // decPointButton
@@ -83,10 +85,32 @@
             this.equalButton.Location = new System.Drawing.Point(296, 330);
             this.equalButton.Name = "equalButton";
             this.equalButton.Size = new System.Drawing.Size(55, 60);
-            this.equalButton.TabIndex = 17;
+            this.equalButton.TabIndex = 0;
             this.equalButton.Text = "=";
             this.equalButton.UseVisualStyleBackColor = true;
             this.equalButton.Click += new System.EventHandler(this.EqualButtonClick);
+            // 
+            // operationButton_exp
+            // 
+            this.operationButton_exp.Location = new System.Drawing.Point(296, 198);
+            this.operationButton_exp.Name = "operationButton_exp";
+            this.operationButton_exp.Operation = OperationType.exp;
+            this.operationButton_exp.Size = new System.Drawing.Size(55, 60);
+            this.operationButton_exp.TabIndex = 19;
+            this.operationButton_exp.Text = "^";
+            this.operationButton_exp.UseVisualStyleBackColor = true;
+            this.operationButton_exp.Click += new System.EventHandler(this.OperationButtonClick);
+            // 
+            // operationButton_sqr
+            // 
+            this.operationButton_sqr.Location = new System.Drawing.Point(296, 132);
+            this.operationButton_sqr.Name = "operationButton_sqr";
+            this.operationButton_sqr.Operation = OperationType.sqr;
+            this.operationButton_sqr.Size = new System.Drawing.Size(55, 60);
+            this.operationButton_sqr.TabIndex = 18;
+            this.operationButton_sqr.Text = "x√(y)";
+            this.operationButton_sqr.UseVisualStyleBackColor = true;
+            this.operationButton_sqr.Click += new System.EventHandler(this.OperationButtonClick);
             // 
             // operationButton_div
             // 
@@ -247,6 +271,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(457, 457);
+            this.Controls.Add(this.operationButton_exp);
+            this.Controls.Add(this.operationButton_sqr);
             this.Controls.Add(this.equalButton);
             this.Controls.Add(this.operationButton_div);
             this.Controls.Add(this.operationButton_mul);
@@ -267,6 +293,7 @@
             this.Controls.Add(this.mainValueBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPressEvent);
@@ -294,6 +321,8 @@
         private OperationButton operationButton_div;
         private OperationButton operationButton_mul;
         private System.Windows.Forms.Button equalButton;
+        private OperationButton operationButton_sqr;
+        private OperationButton operationButton_exp;
     }
 }
 

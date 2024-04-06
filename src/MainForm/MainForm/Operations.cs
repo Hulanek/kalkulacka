@@ -64,5 +64,39 @@ namespace MainForm
         {
             return num1 * num2;
         }
+        
+        /**
+        * Funkce umocňování s přirozenými exponenty
+        * 
+        * @param num1 První operand pro operaci - základ
+        * @param num2 Druhý operand pro operaci - exponent
+        * @return Vrací výsledek operace
+        */
+        public double Exp(double num1, double num2)
+        {
+            double baseNum = num1;
+            if (num2 == 0)
+            {
+                return 1;
+            }
+            for (int i = 0; i < num2 - 1; i++)
+            {
+                num1 *= baseNum;
+            }
+            return num1;
+        }
+
+        /**
+        * Funkce obecné odmocniny s přirozenýni exponenty
+        * 
+        * @param num1 První operand pro operaci - základ
+        * @param num2 Druhý operand pro operaci - exponent
+        * @return Vrací výsledek operace
+        */
+        public double Sqr(double num1, double num2)
+        {
+            num2 = Math.Sqrt(num2);
+            return num2;
+        }
     }
 }
