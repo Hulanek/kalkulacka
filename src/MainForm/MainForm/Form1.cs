@@ -96,7 +96,7 @@ namespace MainForm
         }
 
         /**
-        * Funkce pro detekci zmáčknutého tlačítka s desetinnou čárkou z GUI a získání jeho hodnoty (resp. operace)
+        * Funkce pro detekci zmáčknutého tlačítka s desetinnou čárkou z GUI
         */
         private void DecimalButtonClick(object sender, EventArgs e)
         {
@@ -104,7 +104,15 @@ namespace MainForm
         }
 
         /**
-        * Funkce pro detekci zmáčknutí tlačítka rovnosti z GUI a získání jeho hodnoty (resp. operace)
+        * Funkce pro detekci zmáčknutí tlačítka pro změnu znaménka z GUI
+        */
+        private void PlusMinusButtonClick(object sender, EventArgs e)
+        {
+            PlusMinus();
+        }
+
+        /**
+        * Funkce pro detekci zmáčknutí tlačítka rovnosti z GUI
         */
         public void EqualButtonClick(object sender, EventArgs e)
         {
@@ -128,24 +136,32 @@ namespace MainForm
                 currentValueStr = "0";
             }
 
-            if (currentValueStr.Length < maxNumOfDigits)
+            int numOfDigits = currentValueStr.Length;
+            if (currentValueStr.Contains(","))
+            {
+                numOfDigits--;
+            }
+            if (currentValueStr.Contains("-"))
+            {
+                numOfDigits--;
+            }
+            if (numOfDigits < maxNumOfDigits)
             {
                 if (currentValueStr == "0")
                 {
                     currentValueStr = value.ToString();
                 }
+                else if (currentValueStr == "-0")
+                {
+                    currentValueStr = "-" + value.ToString();
+                }
                 else
-                { 
+                {
                     currentValueStr += value.ToString();
                     //přidání požadované hodnoty jako poslední cifru
                 }
                 PrintCurrentValue();
                 currentValue = Convert.ToDouble(currentValueStr);
-            }
-            else
-            { 
-                //presahnuto dovoleny pocet cifer
-                //nejakym zpuobem vypis chyby
             }
             currentState = CurrentState.number;
         }
@@ -167,6 +183,32 @@ namespace MainForm
             { 
                 //pokud chceme pridat desetinnou carku po zadani operace
                 //  bud chyba nebo se nestane nic
+            }
+        }
+
+        /**
+        * Funkce pro nastavení zda je číslo kladné nebo záporné
+        */
+        private void PlusMinus()
+        {
+            if (currentState == CurrentState.number)
+            {
+                if (currentValueStr.Contains("-"))
+                {
+                    currentValueStr = currentValueStr.Remove(0, 1);
+                }
+                else
+                {
+                    currentValueStr = "-" + currentValueStr;
+                }
+                PrintCurrentValue();
+                currentValue = Convert.ToDouble(currentValueStr);
+            }
+            else if (currentState == CurrentState.operation)
+            {
+                AddValue(0); //ResetValue
+                currentValueStr = "-" + currentValueStr;
+                PrintCurrentValue();
             }
         }
 

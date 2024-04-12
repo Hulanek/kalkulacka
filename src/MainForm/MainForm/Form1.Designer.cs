@@ -48,6 +48,7 @@
             this.numButton3 = new MainForm.NumButton();
             this.numButton2 = new MainForm.NumButton();
             this.numButton1 = new MainForm.NumButton();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainValueBox
@@ -266,11 +267,22 @@
             this.numButton1.UseVisualStyleBackColor = true;
             this.numButton1.Click += new System.EventHandler(this.ValueButtonClick);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(28, 330);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(55, 60);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "+/-";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.PlusMinusButtonClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(457, 457);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.operationButton_exp);
             this.Controls.Add(this.operationButton_sqr);
             this.Controls.Add(this.equalButton);
@@ -323,6 +335,7 @@
         private System.Windows.Forms.Button equalButton;
         private OperationButton operationButton_sqr;
         private OperationButton operationButton_exp;
+        private System.Windows.Forms.Button button1;
     }
 }
 
