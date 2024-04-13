@@ -103,5 +103,35 @@ namespace MainForm
             return guess;
             
         }
+
+        /**
+        * Funkce faktoriálu
+        * @param num1 Operand pro operaci - základ
+        * @return Vrací výsledek operace
+        */
+        public double Fac(double num1)
+        {
+            double facCounter = (double)num1;
+            num1 = 1;
+            for ( double i = facCounter; i > 0; i--)
+            {
+                num1 = num1 * i;
+            }
+            return num1;
+        }
+
+        /**
+        * Funkce absolutní hodnoty
+        * @param num1 Operand pro operaci - základ
+        * @return Vrací výsledek operace
+        */
+        public double Abs(double num1)
+        {
+            if (num1 < 0)
+            {
+                num1 = -num1;
+            }
+            return num1;
+        }
     }
 }

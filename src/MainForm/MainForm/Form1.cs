@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 
 /**
-* Enum obsahující všechny matematické operace.
+* Enum obsahující všechny BINÁRNÍ matematické operace.
 * Sčítání, odčítání, dělení, násobení, umocňování, obecná odmocnina
 */
 public enum OperationType
@@ -105,12 +105,28 @@ namespace MainForm
         }
 
         /**
-        * Funkce pro detekci zmáčknutého tlačítka s operací z GUI a získání jeho hodnoty (resp. operace)
+        * Funkce pro detekci zmáčknutého tlačítka s binární operací z GUI a získání jeho hodnoty (resp. operace)
         */
         private void OperationButtonClick(object sender, EventArgs e)
         {
             OperationButton clickedButton = (OperationButton)(sender);
             AddOperation(clickedButton.operation);
+        }
+
+        /**
+        * Funkce pro detekci zmáčknutí tlačítka pro faktoriál z GUI
+        */
+        private void FactorialButtonClick(object sender, EventArgs e)
+        {
+            ExecuteFactorial();
+        }
+
+        /**
+        * Funkce pro detekci zmáčknutí tlačítka pro absolutní hodnotu z GUI
+        */
+        private void AbsoluteButtonClick(object sender, EventArgs e)
+        {
+            ExecuteAbsolute();
         }
 
         /**
@@ -152,6 +168,7 @@ namespace MainForm
         {
             ResetValues();
         }
+
 
 
 
@@ -317,10 +334,10 @@ namespace MainForm
         }
 
         /**
-        * Funkce pro vykonání operace
+        * Funkce pro vykonání binárních operací
         * Funkce pracuje s instancí matematické třídy Operations
         * @param operation Operace, která se má vykonat
-        * @return if execution was successful
+        * @return Zda vykonání bylo úspěšné
         */
         public bool ExecuteOperation(OperationType operation)
         {
@@ -395,10 +412,51 @@ namespace MainForm
                 PrintErrorMessage();
                 return false;
             }
-
             lastValue = currentValue;
             currentValue = 0;
             return true;
+        }
+
+        /**
+        * Funkce pro vykonání unární operace - faktoriál
+        * Výsledek fukce se ihned zobrazí v hlavním textboxu
+        */
+        public void ExecuteFactorial()
+        {
+            if (currentState == CurrentState.number)
+            {
+                if(currentValue % 1 != 0 || currentValue < 0)//kontrola přirozeného čísla
+                {
+                    currentState = CurrentState.error;
+                    errorMessage = "Základ musí být přirozený";
+                    PrintErrorMessage();
+                    return;
+                }
+                currentValue = operations.Fac(currentValue);
+                if (currentValue > maxDisplayableVal)
+                {
+                    currentState = CurrentState.error;
+                    errorMessage = "Přetečení";
+                    PrintErrorMessage();
+                    return;
+                }
+                currentValueStr = Convert.ToString(currentValue);
+                PrintCurrentValue();
+            }
+        }
+
+        /**
+        * Funkce pro vykonání unární operace - absolutní hodnota
+        * Výsledek fukce se ihned zobrazí v hlavním textboxu
+        */
+        public void ExecuteAbsolute()
+        {
+            if (currentState == CurrentState.number)
+            {
+                currentValue = operations.Abs(currentValue);
+                currentValueStr = Convert.ToString(currentValue);
+                PrintCurrentValue();
+            }
         }
 
         /**
@@ -428,6 +486,10 @@ namespace MainForm
                 if (ExecuteOperation(currentOperation))
                 {
                     mainValueBox.Text = lastValue.ToString();
+
+                    //test = string.Format("{0:0.000000000000}", lastValue);
+                    //label1.Text = test;
+
                     currentState = CurrentState.result;
                 }
                 else
@@ -500,6 +562,5 @@ namespace MainForm
                 Result();
             }
         }
-
     }
 }

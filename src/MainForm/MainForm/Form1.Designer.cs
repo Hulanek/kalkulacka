@@ -32,7 +32,11 @@
             this.decPointButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.equalButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.plusMinusButton = new System.Windows.Forms.Button();
+            this.backspaceButton = new System.Windows.Forms.Button();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.operationButton_fac = new System.Windows.Forms.Button();
+            this.operationButton_abs = new System.Windows.Forms.Button();
             this.operationButton_exp = new MainForm.OperationButton();
             this.operationButton_sqr = new MainForm.OperationButton();
             this.operationButton_div = new MainForm.OperationButton();
@@ -49,8 +53,6 @@
             this.numButton3 = new MainForm.NumButton();
             this.numButton2 = new MainForm.NumButton();
             this.numButton1 = new MainForm.NumButton();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainValueBox
@@ -60,7 +62,7 @@
             this.mainValueBox.Name = "mainValueBox";
             this.mainValueBox.ReadOnly = true;
             this.mainValueBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.mainValueBox.Size = new System.Drawing.Size(372, 38);
+            this.mainValueBox.Size = new System.Drawing.Size(387, 38);
             this.mainValueBox.TabIndex = 5;
             this.mainValueBox.Text = "0";
             // 
@@ -93,15 +95,55 @@
             this.equalButton.UseVisualStyleBackColor = true;
             this.equalButton.Click += new System.EventHandler(this.EqualButtonClick);
             // 
-            // button1
+            // plusMinusButton
             // 
-            this.button1.Location = new System.Drawing.Point(28, 330);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(55, 60);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "+/-";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.PlusMinusButtonClick);
+            this.plusMinusButton.Location = new System.Drawing.Point(28, 330);
+            this.plusMinusButton.Name = "plusMinusButton";
+            this.plusMinusButton.Size = new System.Drawing.Size(55, 60);
+            this.plusMinusButton.TabIndex = 20;
+            this.plusMinusButton.Text = "+/-";
+            this.plusMinusButton.UseVisualStyleBackColor = true;
+            this.plusMinusButton.Click += new System.EventHandler(this.PlusMinusButtonClick);
+            // 
+            // backspaceButton
+            // 
+            this.backspaceButton.Location = new System.Drawing.Point(294, 132);
+            this.backspaceButton.Name = "backspaceButton";
+            this.backspaceButton.Size = new System.Drawing.Size(55, 60);
+            this.backspaceButton.TabIndex = 21;
+            this.backspaceButton.Text = "<--";
+            this.backspaceButton.UseVisualStyleBackColor = true;
+            this.backspaceButton.Click += new System.EventHandler(this.BackspaceButtonClick);
+            // 
+            // clearButton
+            // 
+            this.clearButton.Location = new System.Drawing.Point(233, 132);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(55, 60);
+            this.clearButton.TabIndex = 22;
+            this.clearButton.Text = "C";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.ClearButtonClick);
+            // 
+            // operationButton_fac
+            // 
+            this.operationButton_fac.Location = new System.Drawing.Point(294, 331);
+            this.operationButton_fac.Name = "operationButton_fac";
+            this.operationButton_fac.Size = new System.Drawing.Size(55, 59);
+            this.operationButton_fac.TabIndex = 23;
+            this.operationButton_fac.Text = "!";
+            this.operationButton_fac.UseVisualStyleBackColor = true;
+            this.operationButton_fac.Click += new System.EventHandler(this.FactorialButtonClick);
+            // 
+            // operationButton_abs
+            // 
+            this.operationButton_abs.Location = new System.Drawing.Point(233, 330);
+            this.operationButton_abs.Name = "operationButton_abs";
+            this.operationButton_abs.Size = new System.Drawing.Size(55, 59);
+            this.operationButton_abs.TabIndex = 24;
+            this.operationButton_abs.Text = "|x|";
+            this.operationButton_abs.UseVisualStyleBackColor = true;
+            this.operationButton_abs.Click += new System.EventHandler(this.AbsoluteButtonClick);
             // 
             // operationButton_exp
             // 
@@ -279,34 +321,16 @@
             this.numButton1.UseVisualStyleBackColor = true;
             this.numButton1.Click += new System.EventHandler(this.ValueButtonClick);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(294, 132);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(55, 60);
-            this.button2.TabIndex = 21;
-            this.button2.Text = "<--";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.BackspaceButtonClick);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(233, 132);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(55, 60);
-            this.button3.TabIndex = 22;
-            this.button3.Text = "C";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.ClearButtonClick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(457, 457);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.operationButton_abs);
+            this.Controls.Add(this.operationButton_fac);
+            this.Controls.Add(this.clearButton);
+            this.Controls.Add(this.backspaceButton);
+            this.Controls.Add(this.plusMinusButton);
             this.Controls.Add(this.operationButton_exp);
             this.Controls.Add(this.operationButton_sqr);
             this.Controls.Add(this.equalButton);
@@ -359,9 +383,11 @@
         private System.Windows.Forms.Button equalButton;
         private OperationButton operationButton_sqr;
         private OperationButton operationButton_exp;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button plusMinusButton;
+        private System.Windows.Forms.Button backspaceButton;
+        private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.Button operationButton_fac;
+        private System.Windows.Forms.Button operationButton_abs;
     }
 }
 
