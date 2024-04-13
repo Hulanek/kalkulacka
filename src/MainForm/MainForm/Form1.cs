@@ -76,6 +76,24 @@ namespace MainForm
             PrintCurrentValue();
         }
 
+         /**
+        * Funkce pro počítání cifer
+        * @param num Číslo, pro které se má počet cifer vzpočítat
+        * @return Počet cifer
+        */
+        public int NumOfDigits(string numStr)
+        { 
+            int numOfDigits = 0;
+            for(int i = 0; i < numStr.Length; i++)
+            { 
+                if(numStr[i] >= '0' && numStr[i] <= '9')
+                { 
+                    numOfDigits++;
+                }
+            }
+            return numOfDigits;
+        }
+
         /**
         * Funkce pro detekci zmáčknutého číselného tlačítka z GUI a získání jeho hodnoty
         */
@@ -118,6 +136,24 @@ namespace MainForm
         {
             Result();
         }
+
+        /**
+        * Funkce pro detekci zmáčknutí tlačítka pro mazání posledního znaku z GUI
+        */
+        private void BackspaceButtonClick(object sender, EventArgs e)
+        {
+            Backspace();
+        }
+
+        /**
+        * Funkce pro detekci zmáčknutí resetovacího tlačítka z GUI
+        */
+        private void ClearButtonClick(object sender, EventArgs e)
+        {
+            ResetValues();
+        }
+
+
 
         /**
         * Funkce pro přidání aktuální hodnoty 
@@ -179,11 +215,6 @@ namespace MainForm
                 }
                 PrintCurrentValue();
             }
-            else
-            { 
-                //pokud chceme pridat desetinnou carku po zadani operace
-                //  bud chyba nebo se nestane nic
-            }
         }
 
         /**
@@ -209,6 +240,27 @@ namespace MainForm
                 AddValue(0); //ResetValue
                 currentValueStr = "-" + currentValueStr;
                 PrintCurrentValue();
+            }
+        }
+
+        /**
+        * Funkce pro mazání poslední cifry
+        */
+        private void Backspace()
+        { 
+            if (currentState == CurrentState.number)
+            {
+                if (NumOfDigits(currentValueStr) <= 1)
+                {
+                    currentValueStr = "0";
+                }
+                else
+                { 
+                   currentValueStr = currentValueStr.Remove(currentValueStr.Length - 1, 1);
+                
+                }
+                PrintCurrentValue();
+                currentValue = Convert.ToDouble(currentValueStr);
             }
         }
 
@@ -307,7 +359,24 @@ namespace MainForm
             {
                 if(lastValue % 1 == 0 && lastValue >= 0)//kontrola zda je exponent prirozene cislo
                 { 
-                    currentValue = operations.Sqr(lastValue, currentValue);
+                    if (lastValue % 2 == 0) //pro sudý index odmocniny musí být číslo nezáporné
+                    {
+                        if(currentValue >= 0)
+                        { 
+                            currentValue = operations.Sqr(lastValue, currentValue);
+                        }
+                        else
+                        {    
+                            currentState = CurrentState.error;
+                            errorMessage = "Neplatný formát pro odmocninu";
+                            PrintErrorMessage();
+                            return false;
+                        }
+                    }
+                    else
+                    { 
+                        currentValue = operations.Sqr(lastValue, currentValue);
+                    }
                 }
                 else
                 { 
@@ -418,11 +487,19 @@ namespace MainForm
             //    AddOperation(OperationType.sqr);
             //}
             //tady dalsi operace
+            
+            
+            else if (pressedChar == (char)Keys.Back)
+            {
+                Backspace();
+            }
+
 
             else if (pressedChar == '=')
             {
                 Result();
             }
         }
+
     }
 }

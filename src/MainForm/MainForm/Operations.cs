@@ -93,10 +93,15 @@ namespace MainForm
         * @param num2 Druhý operand pro operaci - exponent
         * @return Vrací výsledek operace
         */
-        public double Sqr(double num1, double num2)
+        public double Sqr(double num1, double num2, double epsilon = 0.000001)
         {
-            num2 = Math.Sqrt(num2);
-            return num2;
+            double guess = num2 / num1; // Začínáme od 1/n vstupního čísla
+            while (Math.Abs(num2 - Math.Pow(guess, num1)) > epsilon)
+            {
+                guess = ((num1- 1) * guess + num2 / Math.Pow(guess, num1- 1)) / num1; // Vylepšená hodnota odhadu
+            }
+            return guess;
+            
         }
     }
 }
