@@ -6,7 +6,7 @@ SOURCES = MainForm/MainForm/Form1.cs MainForm/MainForm/Form1.Designer.cs MainFor
 OUTPUT = Kalkulacka.exe
 
 all: $(SOURCES)
-	$(CSC) /out:$(OUTPUT) $^
+	$(CSC) /out:$(OUTPUT) 
 
 clean:
 	del -f $(OUTPUT)
