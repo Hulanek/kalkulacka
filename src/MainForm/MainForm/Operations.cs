@@ -1,4 +1,11 @@
-﻿//hlavička
+﻿/**************************
+* Název projektu: Kalkulačka
+* Soubor: Operations.cs
+* Autor: Martin Konečný xkonecm00@stud.fit.vutbr.cz
+*
+* Popis: Matematická knihovna
+************************/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,6 +98,7 @@ namespace MainForm
         * 
         * @param num1 První operand pro operaci - základ
         * @param num2 Druhý operand pro operaci - exponent
+        * @param epsilon Určuje přesnost aproximace
         * @return Vrací výsledek operace
         */
         public double Sqr(double num1, double num2, double epsilon = 0.000001)
