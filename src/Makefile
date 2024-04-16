@@ -2,7 +2,8 @@
 CSC = csc
 CSC_FLAGS = /warn:4 /optimize+ /nologo #/target:4.7.2
 
-SOURCES = MainForm/MainForm/Form1.cs MainForm/MainForm/Form1.Designer.cs MainForm/MainForm/NumButton.cs MainForm/MainForm/OperationButton.cs MainForm/MainForm/Operations.cs MainForm/MainForm/Program.cs MainForm/MainForm/Properties/AssemblyInfo.cs MainForm/MainForm/Properties/Resources.Designer.cs MainForm/MainForm/Properties/Settings.Designer.cs 
+SOURCE = MainForm
+SOURCES = $(wildcard $(SOURCE)/**/*.cs)
 OUTPUT = Kalkulacka.exe
 
 all: $(OUTPUT)
@@ -13,6 +14,10 @@ pack:
 clean:
 	del -f $(OUTPUT)
 run:
-	./$(OUTPUT)
+	./$(OUTPUT) 
+	./MainForm/MainForm/bin/Debug/MainForm.exe #zkusit zautomatizovat pri nejhorsim nechat
 profile:
 help:
+	@echo Napoveda:
+	@echo Je potreba pouzit 'make' pro prelozeni projektu a nasledene 'make run' pro spusteni
+	@echo Manualne zkompilovat program ve VS a nasledne pouzit 'make run'
