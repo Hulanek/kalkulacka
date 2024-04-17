@@ -6,11 +6,16 @@ SOURCE = MainForm
 SOURCES = $(wildcard $(SOURCE)/**/*.cs)
 OUTPUT = Kalkulacka.exe
 
+ZIP = xlogin01_xlogin02_xlogin03_xlogin04.zip #doplnit tymove loginy
+ZIP_SCRIPT = 'Compress-Archive -Path ".." -DestinationPath "$(ZIP)"'
+
+
 all: $(OUTPUT)
 $(OUTPUT): $(SOURCES)
 	$(CSC) $(CSC_FLAGS) $^ -out:$@
 	
-pack:
+pack: 
+	powershell -Command $(ZIP_SCRIPT)
 clean:
 	del -f $(OUTPUT)
 run:
