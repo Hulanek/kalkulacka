@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using MainForm;
+using Operace;
 
 
-/*@author Jan Hrdina
+
+/**
+ * @author Jan Hrdina
  *@date 9.04.2024
  *@brief Program pro vypocet vyberove smerodatne odchylky ze vstupniho souboru
  * 
- * */
-
+ */
 namespace Odchylka
 {
     class Stddev
     {
 
 
-        /*@brief Vypocet sumy cisel
+        /** Vypocet sumy cisel
          *@param nums = pole double cisel
          *@return Vraci sumu cisel
          */
@@ -30,26 +31,13 @@ namespace Odchylka
             }
             return sum;
         }
-        /*
-         * @brief Vypocet sumy ctverce ze vzroce
+        /**
+         * Vypocet sumy ctverce ze vzroce
          * @param nums[] = pole vstupnich cisel
          * @param deviation = aritmeticky prumer
          * @return Vraci sumu ctverce rozdilu jednotlivych polozek vuci prumeru
          */
         static double Sum_square(double[] nums, double deviation)
-        {
-            double sum = 0;
-            for (int i = 0; i < nums.Length; i++)
-            {
-                double x = nums[i];
-
-                x = x - deviation;
-                x *= x;
-                sum += x;
-            }
-            return sum;
-        }
-        static double Sum_square2(double[] nums, double deviation)
         {
             deviation *= deviation;
             double sum_length = nums.Length;
@@ -63,34 +51,8 @@ namespace Odchylka
             }
             return sum - (sum_length*deviation);
         }
-
-        /* 
-         * @brief Vypocet n-te odmocniny
-         * @param number = Cislo, ktere chceme odmocnit
-         * @param n = cislo, ktere urcuje odmocninu
-         * @param epsilon = Cislo, ktere urcuje maximalni chybu vypoctu
-         * 
-         */
-        public static double CalculateNthRoot(double number, int n, double epsilon = 0.0000001)
-        {
-            if (number < 0 && n % 2 == 0)
-            {
-                throw new ArgumentException("Pro sudý index odmocniny musí být číslo nezáporné.");
-            }
-
-            double guess = number / (double)n; // Začínáme od 1/n vstupního čísla
-
-            while (Math.Abs(number - Math.Pow(guess, n)) > epsilon)
-            {
-                guess = ((n - 1) * guess + number / Math.Pow(guess, n - 1)) / n; // Vylepšená hodnota odhadu
-            }
-
-            return guess;
-        }
-        
-
-        
-
+  
+         
         static void Main(string[] args)
         {
             // Kontrola jestli byl zadan argument
@@ -101,6 +63,7 @@ namespace Odchylka
             }
 
             string filePath = args[0];
+            Operations operation = new Operations();
 
             try
             {
@@ -124,45 +87,21 @@ namespace Odchylka
                         
                     }
                 }
-                /*
-                 *@param num_length = pocet cisel 
-                 *@param sum_num = suma cisel 
-                 * @param x_line = aritmeticky prumer
-                 * @param s_deleni = deleni na leve strane 1/N-1
-                 * @param before_sqrt = pred omodcnovanim
-                 * @param after_sqrt = po odmocnine
-                 */
+                
                 double num_length = numbers.Length;
-                
                 double sum_num = (Stddev.Sum(numbers));
-                double x_line = (1 / num_length) * sum_num;
-
-                
-                
-                double s_deleni = 1 / (num_length-1);
-                
-
-                double before_sqrt = s_deleni * (Stddev.Sum_square(numbers, x_line));
-                double before_sqrt2 = s_deleni * Stddev.Sum_square2(numbers, x_line);
-                double after_sqrt = Stddev.CalculateNthRoot(before_sqrt, 2);
+                double x_line = operation.Mul(operation.Div(1, num_length), sum_num);
+                double s_deleni = operation.Div(1, operation.Sub(num_length, 1));
+               
+                double before_sqrt = s_deleni * Stddev.Sum_square(numbers, x_line);
+                double after_sqrt = operation.Sqr(2,before_sqrt);
                 Console.WriteLine(after_sqrt);
-                Console.WriteLine(Stddev.CalculateNthRoot(before_sqrt2, 2));
-                double cislo = 5000;
-                double cislo2 = Stddev.CalculateNthRoot(cislo, 10);
-                Console.WriteLine(cislo2);
-
-                //tady to zkousim pouzit.
-                double zkouska = 0;
-                Operations operations = new Operations();
-                zkouska = operations.Mul(10, 20);
+               
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error: " + ex.Message);
             }
-
-
-
         }
     }
 }
