@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Odchylka")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+351f34525c58a59acc11d8b7b6d83e15496cb940")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1e859d7819c18cd09450ced20d3ca2c2052d21d5")]
 [assembly: System.Reflection.AssemblyProductAttribute("Odchylka")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Odchylka")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
