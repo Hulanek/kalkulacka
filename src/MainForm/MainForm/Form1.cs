@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 
 /**
-* Enum obsahující všechny matematické operace.
-* Sčítání, odčítání, dělení, násobení
+* Enum obsahující všechny BINÁRNÍ matematické operace.
+* Sčítání, odčítání, dělení, násobení, umocňování, obecná odmocnina
 */
 public enum OperationType
 {
-    add, sub, div, mul
+    add, sub, div, mul, exp, sqr
 }
 
 /**
@@ -76,6 +76,24 @@ namespace MainForm
             PrintCurrentValue();
         }
 
+         /**
+        * Funkce pro počítání cifer
+        * @param num Číslo, pro které se má počet cifer vzpočítat
+        * @return Počet cifer
+        */
+        public int NumOfDigits(string numStr)
+        { 
+            int numOfDigits = 0;
+            for(int i = 0; i < numStr.Length; i++)
+            { 
+                if(numStr[i] >= '0' && numStr[i] <= '9')
+                { 
+                    numOfDigits++;
+                }
+            }
+            return numOfDigits;
+        }
+
         /**
         * Funkce pro detekci zmáčknutého číselného tlačítka z GUI a získání jeho hodnoty
         */
@@ -87,7 +105,7 @@ namespace MainForm
         }
 
         /**
-        * Funkce pro detekci zmáčknutého tlačítka s operací z GUI a získání jeho hodnoty (resp. operace)
+        * Funkce pro detekci zmáčknutého tlačítka s binární operací z GUI a získání jeho hodnoty (resp. operace)
         */
         private void OperationButtonClick(object sender, EventArgs e)
         {
@@ -96,7 +114,23 @@ namespace MainForm
         }
 
         /**
-        * Funkce pro detekci zmáčknutého tlačítka s desetinnou čárkou z GUI a získání jeho hodnoty (resp. operace)
+        * Funkce pro detekci zmáčknutí tlačítka pro faktoriál z GUI
+        */
+        private void FactorialButtonClick(object sender, EventArgs e)
+        {
+            ExecuteFactorial();
+        }
+
+        /**
+        * Funkce pro detekci zmáčknutí tlačítka pro absolutní hodnotu z GUI
+        */
+        private void AbsoluteButtonClick(object sender, EventArgs e)
+        {
+            ExecuteAbsolute();
+        }
+
+        /**
+        * Funkce pro detekci zmáčknutého tlačítka s desetinnou čárkou z GUI
         */
         private void DecimalButtonClick(object sender, EventArgs e)
         {
@@ -104,12 +138,39 @@ namespace MainForm
         }
 
         /**
-        * Funkce pro detekci zmáčknutí tlačítka rovnosti z GUI a získání jeho hodnoty (resp. operace)
+        * Funkce pro detekci zmáčknutí tlačítka pro změnu znaménka z GUI
+        */
+        private void PlusMinusButtonClick(object sender, EventArgs e)
+        {
+            PlusMinus();
+        }
+
+        /**
+        * Funkce pro detekci zmáčknutí tlačítka rovnosti z GUI
         */
         public void EqualButtonClick(object sender, EventArgs e)
         {
             Result();
         }
+
+        /**
+        * Funkce pro detekci zmáčknutí tlačítka pro mazání posledního znaku z GUI
+        */
+        private void BackspaceButtonClick(object sender, EventArgs e)
+        {
+            Backspace();
+        }
+
+        /**
+        * Funkce pro detekci zmáčknutí resetovacího tlačítka z GUI
+        */
+        private void ClearButtonClick(object sender, EventArgs e)
+        {
+            ResetValues();
+        }
+
+
+
 
         /**
         * Funkce pro přidání aktuální hodnoty 
@@ -128,24 +189,32 @@ namespace MainForm
                 currentValueStr = "0";
             }
 
-            if (currentValueStr.Length < maxNumOfDigits)
+            int numOfDigits = currentValueStr.Length;
+            if (currentValueStr.Contains(","))
+            {
+                numOfDigits--;
+            }
+            if (currentValueStr.Contains("-"))
+            {
+                numOfDigits--;
+            }
+            if (numOfDigits < maxNumOfDigits)
             {
                 if (currentValueStr == "0")
                 {
                     currentValueStr = value.ToString();
                 }
+                else if (currentValueStr == "-0")
+                {
+                    currentValueStr = "-" + value.ToString();
+                }
                 else
-                { 
+                {
                     currentValueStr += value.ToString();
                     //přidání požadované hodnoty jako poslední cifru
                 }
                 PrintCurrentValue();
                 currentValue = Convert.ToDouble(currentValueStr);
-            }
-            else
-            { 
-                //presahnuto dovoleny pocet cifer
-                //nejakym zpuobem vypis chyby
             }
             currentState = CurrentState.number;
         }
@@ -163,10 +232,52 @@ namespace MainForm
                 }
                 PrintCurrentValue();
             }
-            else
-            { 
-                //pokud chceme pridat desetinnou carku po zadani operace
-                //  bud chyba nebo se nestane nic
+        }
+
+        /**
+        * Funkce pro nastavení zda je číslo kladné nebo záporné
+        */
+        private void PlusMinus()
+        {
+            if (currentState == CurrentState.number)
+            {
+                if (currentValueStr.Contains("-"))
+                {
+                    currentValueStr = currentValueStr.Remove(0, 1);
+                }
+                else
+                {
+                    currentValueStr = "-" + currentValueStr;
+                }
+                PrintCurrentValue();
+                currentValue = Convert.ToDouble(currentValueStr);
+            }
+            else if (currentState == CurrentState.operation)
+            {
+                AddValue(0); //ResetValue
+                currentValueStr = "-" + currentValueStr;
+                PrintCurrentValue();
+            }
+        }
+
+        /**
+        * Funkce pro mazání poslední cifry
+        */
+        private void Backspace()
+        { 
+            if (currentState == CurrentState.number)
+            {
+                if (NumOfDigits(currentValueStr) <= 1)
+                {
+                    currentValueStr = "0";
+                }
+                else
+                { 
+                   currentValueStr = currentValueStr.Remove(currentValueStr.Length - 1, 1);
+                
+                }
+                PrintCurrentValue();
+                currentValue = Convert.ToDouble(currentValueStr);
             }
         }
 
@@ -211,14 +322,22 @@ namespace MainForm
             {
                 mainValueBox.Text = "*";
             }
+            else if (currentOperation == OperationType.exp)
+            {
+                mainValueBox.Text = "^";
+            }
+            else if (currentOperation == OperationType.sqr)
+            {
+                mainValueBox.Text = "√";
+            }
             currentState = CurrentState.operation;
         }
 
         /**
-        * Funkce pro vykonání operace
+        * Funkce pro vykonání binárních operací
         * Funkce pracuje s instancí matematické třídy Operations
         * @param operation Operace, která se má vykonat
-        * @return if execution was successful
+        * @return Zda vykonání bylo úspěšné
         */
         public bool ExecuteOperation(OperationType operation)
         {
@@ -239,6 +358,52 @@ namespace MainForm
             {
                 currentValue = operations.Mul(lastValue, currentValue);
             }
+            else if (operation == OperationType.exp)
+            {
+                if(currentValue % 1 == 0 && currentValue >= 0)//kontrola zda je exponent prirozene cislo
+                { 
+                    currentValue = operations.Exp(lastValue, currentValue);
+                }
+                else
+                { 
+                    currentState = CurrentState.error;
+                    errorMessage = "Exponent musí být přirozený";
+                    PrintErrorMessage();
+                    return false;
+                }
+            }
+            else if (operation == OperationType.sqr)
+            {
+                if(lastValue % 1 == 0 && lastValue >= 0)//kontrola zda je exponent prirozene cislo
+                { 
+                    if (lastValue % 2 == 0) //pro sudý index odmocniny musí být číslo nezáporné
+                    {
+                        if(currentValue >= 0)
+                        { 
+                            currentValue = operations.Sqr(lastValue, currentValue);
+                        }
+                        else
+                        {    
+                            currentState = CurrentState.error;
+                            errorMessage = "Neplatný formát pro odmocninu";
+                            PrintErrorMessage();
+                            return false;
+                        }
+                    }
+                    else
+                    { 
+                        currentValue = operations.Sqr(lastValue, currentValue);
+                    }
+                }
+                else
+                { 
+                    currentState = CurrentState.error;
+                    errorMessage = "Exponent musí být přirozený";
+                    PrintErrorMessage();
+                    return false;
+                }
+            }
+
 
             if (currentValue > maxDisplayableVal || currentValue < -maxDisplayableVal)
             {
@@ -247,10 +412,51 @@ namespace MainForm
                 PrintErrorMessage();
                 return false;
             }
-
             lastValue = currentValue;
             currentValue = 0;
             return true;
+        }
+
+        /**
+        * Funkce pro vykonání unární operace - faktoriál
+        * Výsledek fukce se ihned zobrazí v hlavním textboxu
+        */
+        public void ExecuteFactorial()
+        {
+            if (currentState == CurrentState.number)
+            {
+                if(currentValue % 1 != 0 || currentValue < 0)//kontrola přirozeného čísla
+                {
+                    currentState = CurrentState.error;
+                    errorMessage = "Základ musí být přirozený";
+                    PrintErrorMessage();
+                    return;
+                }
+                currentValue = operations.Fac(currentValue);
+                if (currentValue > maxDisplayableVal)
+                {
+                    currentState = CurrentState.error;
+                    errorMessage = "Přetečení";
+                    PrintErrorMessage();
+                    return;
+                }
+                currentValueStr = Convert.ToString(currentValue);
+                PrintCurrentValue();
+            }
+        }
+
+        /**
+        * Funkce pro vykonání unární operace - absolutní hodnota
+        * Výsledek fukce se ihned zobrazí v hlavním textboxu
+        */
+        public void ExecuteAbsolute()
+        {
+            if (currentState == CurrentState.number)
+            {
+                currentValue = operations.Abs(currentValue);
+                currentValueStr = Convert.ToString(currentValue);
+                PrintCurrentValue();
+            }
         }
 
         /**
@@ -280,6 +486,10 @@ namespace MainForm
                 if (ExecuteOperation(currentOperation))
                 {
                     mainValueBox.Text = lastValue.ToString();
+
+                    //test = string.Format("{0:0.000000000000}", lastValue);
+                    //label1.Text = test;
+
                     currentState = CurrentState.result;
                 }
                 else
@@ -330,7 +540,22 @@ namespace MainForm
             {
                 AddOperation(OperationType.mul);
             }
+            else if (pressedChar == '^')
+            {
+                AddOperation(OperationType.exp);
+            }
+            //else if (pressedChar == "char ktery reprezentuje odmocninu")
+            //{
+            //    AddOperation(OperationType.sqr);
+            //}
             //tady dalsi operace
+            
+            
+            else if (pressedChar == (char)Keys.Back)
+            {
+                Backspace();
+            }
+
 
             else if (pressedChar == '=')
             {
