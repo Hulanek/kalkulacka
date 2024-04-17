@@ -6,9 +6,11 @@ SOURCE = MainForm
 SOURCES = $(wildcard $(SOURCE)/**/*.cs)
 OUTPUT = Kalkulacka.exe
 
-ZIP = xlogin01_xlogin02_xlogin03_xlogin04.zip #doplnit tymove loginy
+ZIP = xlogin01_xlogin02_xlogin03_xlogin04 #doplnit tymove loginy
 ZIP_SCRIPT = 'Compress-Archive -Path ".." -DestinationPath "$(ZIP)"'
+CLEAN_SCRIPT = $(CURDIR)/MainForm/MainForm/bin/Debug/MainForm.exe
 
+SOURCE_RUN = $(wildcard *.exe)
 
 all: $(OUTPUT)
 $(OUTPUT): $(SOURCES)
@@ -17,10 +19,10 @@ $(OUTPUT): $(SOURCES)
 pack: 
 	powershell -Command $(ZIP_SCRIPT)
 clean:
-	del -f $(OUTPUT)
+	powershell -Command if ( Test-Path -Path $(CURDIR)/*.exe) { del	*.exe} 
+	powershell -Command if (Test-Path -Path $(CURDIR)/MainForm/MainForm/bin/Debug/*.exe) { del "$(CURDIR)\MainForm\MainForm\bin\Debug\*.exe"}
 run:
-	./$(OUTPUT) 
-	./MainForm/MainForm/bin/Debug/MainForm.exe #zkusit zautomatizovat pri nejhorsim nechat
+	powershell -Command  if (Test-Path -Path "$(CURDIR)/*.exe") { "& { & $(CURDIR)/*.exe }" }	elseif (Test-Path -Path $(CURDIR)/MainForm/MainForm/bin/Debug/MainForm.exe) { "& { Start-Process $(CURDIR)/MainForm/MainForm/bin/Debug/MainForm.exe }" } else { echo "ok3" }
 profile:
 help:
 	@echo Napoveda:
