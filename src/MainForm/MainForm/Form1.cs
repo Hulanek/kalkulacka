@@ -1,17 +1,25 @@
-﻿//hlavička
+﻿/**************************
+* Název projektu: Kalkulačka
+* Soubor: Form1.cs
+* Autor: Martin Konečný xkonecm00@stud.fit.vutbr.cz
+*
+* Popis: Třída pro interakci s formulářem
+************************/
 
 using System;
 using System.Windows.Forms;
+
 /**
 * @file Form1.cs
 *
-* @brief Třída zpracovávající vstupy
+* @brief  Třída pro interakci s formulářem
 * @author Martin Konečný
 */
 
 
 /**
 * Enum obsahující všechny BINÁRNÍ matematické operace.
+* 
 * Sčítání, odčítání, dělení, násobení, umocňování, obecná odmocnina
 */
 public enum OperationType
@@ -21,7 +29,8 @@ public enum OperationType
 
 /**
 * Enum obsahující aktuální stav
-* aktuální stav odpovídá zobrazované položce v hlavním okně
+* 
+* Aktuální stav odpovídá zobrazované položce v hlavním okně
 */
 public enum CurrentState
 { 
@@ -40,6 +49,7 @@ namespace MainForm
         //pro double je to 15
         public int maxNumOfDigits = 15;
         public double maxDisplayableVal = 999999999999999; //maximální hodnota pro 15 cifer
+        public double maxFactorial = 17; //maximalní faktoriál zobrazitelný na 15 cifrách
 
 
         public double lastValue; //v operacích vystupuje jako první operand
@@ -78,7 +88,8 @@ namespace MainForm
 
          /**
         * Funkce pro počítání cifer
-        * @param num Číslo, pro které se má počet cifer vzpočítat
+        * 
+        * @param num Číslo, pro které se má počet cifer zpočítat
         * @return Počet cifer
         */
         public int NumOfDigits(string numStr)
@@ -283,7 +294,9 @@ namespace MainForm
 
         /**
         * Funkce pro nastavení a zobrazení operace k provedení
+        * 
         * Pokud je před touto operací potřeba provést operaci předcházející, provede ji
+        * 
         * @param operationToAdd Operace, která se má přidat
         */
         private void AddOperation(OperationType operationToAdd)
@@ -335,7 +348,9 @@ namespace MainForm
 
         /**
         * Funkce pro vykonání binárních operací
+        * 
         * Funkce pracuje s instancí matematické třídy Operations
+        * 
         * @param operation Operace, která se má vykonat
         * @return Zda vykonání bylo úspěšné
         */
@@ -419,6 +434,7 @@ namespace MainForm
 
         /**
         * Funkce pro vykonání unární operace - faktoriál
+        * 
         * Výsledek fukce se ihned zobrazí v hlavním textboxu
         */
         public void ExecuteFactorial()
@@ -432,14 +448,15 @@ namespace MainForm
                     PrintErrorMessage();
                     return;
                 }
-                currentValue = operations.Fac(currentValue);
-                if (currentValue > maxDisplayableVal)
+
+                if (currentValue > maxFactorial) //porovnání nejvetší hodnoty pro kterou lze faktoriál vypočítat
                 {
                     currentState = CurrentState.error;
                     errorMessage = "Přetečení";
                     PrintErrorMessage();
                     return;
                 }
+                currentValue = operations.Fac(currentValue);
                 currentValueStr = Convert.ToString(currentValue);
                 PrintCurrentValue();
             }
@@ -447,6 +464,7 @@ namespace MainForm
 
         /**
         * Funkce pro vykonání unární operace - absolutní hodnota
+        * 
         * Výsledek fukce se ihned zobrazí v hlavním textboxu
         */
         public void ExecuteAbsolute()
@@ -486,10 +504,6 @@ namespace MainForm
                 if (ExecuteOperation(currentOperation))
                 {
                     mainValueBox.Text = lastValue.ToString();
-
-                    //test = string.Format("{0:0.000000000000}", lastValue);
-                    //label1.Text = test;
-
                     currentState = CurrentState.result;
                 }
                 else
@@ -510,9 +524,6 @@ namespace MainForm
         */
         private void KeyPressEvent(object sender, KeyPressEventArgs e)
         {
-            //testovací label
-            label1.Text = "cV = " + currentValue.ToString() + "lV = " + lastValue + "cO = " + currentOperation + "lO = " + lastOperation + currentState.ToString();
-
             char pressedChar = e.KeyChar;
 
             if (pressedChar >= '0' && pressedChar <= '9')

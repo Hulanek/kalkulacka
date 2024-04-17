@@ -1,0 +1,12 @@
+C:\Users\hulu0\source\kalk\src\MainForm\Operace\bin\Debug\net8.0\Operace.deps.json
+C:\Users\hulu0\source\kalk\src\MainForm\Operace\bin\Debug\net8.0\Operace.dll
+C:\Users\hulu0\source\kalk\src\MainForm\Operace\bin\Debug\net8.0\Operace.pdb
+C:\Users\hulu0\source\kalk\src\MainForm\Operace\obj\Debug\net8.0\Operace.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hulu0\source\kalk\src\MainForm\Operace\obj\Debug\net8.0\Operace.AssemblyInfoInputs.cache
+C:\Users\hulu0\source\kalk\src\MainForm\Operace\obj\Debug\net8.0\Operace.AssemblyInfo.cs
+C:\Users\hulu0\source\kalk\src\MainForm\Operace\obj\Debug\net8.0\Operace.csproj.CoreCompileInputs.cache
+C:\Users\hulu0\source\kalk\src\MainForm\Operace\obj\Debug\net8.0\Operace.sourcelink.json
+C:\Users\hulu0\source\kalk\src\MainForm\Operace\obj\Debug\net8.0\Operace.dll
+C:\Users\hulu0\source\kalk\src\MainForm\Operace\obj\Debug\net8.0\refint\Operace.dll
+C:\Users\hulu0\source\kalk\src\MainForm\Operace\obj\Debug\net8.0\Operace.pdb
+C:\Users\hulu0\source\kalk\src\MainForm\Operace\obj\Debug\net8.0\ref\Operace.dll
