@@ -6,7 +6,7 @@
 * Popis: Matematická knihovna
 ************************/
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,7 +72,7 @@ namespace MainForm
         {
             return num1 * num2;
         }
-        
+
         /**
         * Funkce umocňování s přirozenými exponenty
         * 
@@ -107,10 +107,10 @@ namespace MainForm
             double guess = num2 / num1; // Začínáme od 1/n vstupního čísla
             while (Math.Abs(num2 - Math.Pow(guess, num1)) > epsilon)
             {
-                guess = ((num1- 1) * guess + num2 / Math.Pow(guess, num1- 1)) / num1; // Vylepšená hodnota odhadu
+                guess = ((num1 - 1) * guess + num2 / Math.Pow(guess, num1 - 1)) / num1; // Vylepšená hodnota odhadu
             }
             return guess;
-            
+
         }
 
         /**
@@ -122,7 +122,7 @@ namespace MainForm
         {
             double facCounter = (double)num1;
             num1 = 1;
-            for ( double i = facCounter; i > 0; i--)
+            for (double i = facCounter; i > 0; i--)
             {
                 num1 = num1 * i;
             }
@@ -141,146 +141,6 @@ namespace MainForm
                 num1 = -num1;
             }
             return num1;
-        }
-    }
-    //[TestClass]
-    public class OperationsTests
-    {
-        //[TestMethod]
-        public double AddTest()
-        {
-            //arrange
-            var op = new Operations();
-            double num1 = 5;
-            double num2 = 3;
-
-            double expected = 8;
-
-            //act
-            op.Add(num1, num2);
-
-            //assert
-            double actually = op.Add(num1, num2);
-            Assert.AreEqual(expected, actually, 0, "ADD DOES NOT ADD");
-            /*
-            if (op.Add(num1, num2) == ocekavano)
-            {
-                Console.WriteLine("ADD PASSED TEST");
-                //return 0;
-            }
-            else
-            {
-                Console.WriteLine("ADD TEST FAILED");
-            }*/
-            return 0;
-        }
-
-        public void SubTest()
-        {
-            //arrange
-            var op = new Operations();
-            double num1 = 5;
-            double num2 = 3;
-            double expected = 2;
-            //act
-
-            //assert
-            double actually = op.Sub(num1, num2);
-            Assert.AreEqual(expected, actually, 0, "SUB FAILED TEST");
-            /*if (expected == actually) Console.WriteLine();
-            else Console.WriteLine();*/
-        }
-        public void DivTest()
-        {
-            var op = new Operations();
-            double num1 = 12;
-            double num2 = 3;
-            double expected = 4;
-
-            double actually = op.Div(num1, num2);
-            double difference = expected - actually;
-            Assert.AreEqual(expected, actually, 0, "DIV FAILED TEST");
-            /*if (difference < 0.1) Console.WriteLine();
-            else Console.WriteLine(difference);*/
-
-        }
-        public void MulTest()
-        {
-            var op = new Operations();
-            double num1 = 5;
-            double num2 = 3;
-            double expected = 15;
-
-            double actually = op.Mul(num1, num2);
-
-            Assert.AreEqual(expected, actually, 0, "MUL FAILED TEST");
-
-            /* if(expected == actually) Console.WriteLine();
-            else Console.WriteLine();*/
-        }
-
-        public void ExpTest()
-        {
-            var op = new Operations();
-            //ARRANGE
-            double num1 = 5;
-            double num2 = 3;
-            double expected = 225;
-            //ACT
-            double actually = op.Exp(num1, num2);
-            //ASSERT
-            Assert.AreEqual(expected, actually, 0, "EXP FAILED TEST");
-        }
-
-        public void SqrTest()
-        {
-            var op = new Operations();
-            //ARRANGE
-            double num1 = 27;
-            double num2 = 2;
-            double expected = 9;
-            //ACT
-            double actually = op.Sqr(num1, num2);
-            //ASSERT
-            Assert.AreEqual(expected, actually, 0.1, "SQR FAILED THE TEST");
-
-
-            /*double difference = expectation - actually;
-            if (difference < 0.1) Console.WriteLine();
-            else Console.WriteLine();*/
-        }
-        public void FacTest()
-        {
-            var op = new Operations();
-            //ARRANGE
-            double num1 = 5;
-            double expected = 15;
-            //ACT
-            double actually = op.Fac(num1);
-            //ASSERT
-            Assert.AreEqual(expected, actually, 0, "FAC FAILED THE TEST");
-
-            if (op.Fac(num1) == 15) Console.WriteLine();
-            else Console.WriteLine();
-        }
-
-        public void AbsTest()
-        {
-            var op = new Operations();
-            //ARRANGE
-            double num1 = -5;
-            double num2 = 5;
-            double expected = 5;
-            //ACT
-            double actually1 = op.Abs(num1);
-            double actually2 = op.Abs(num2);
-            Assert.AreEqual(actually1, actually2, 0, "ABS FAILED TEST 1");
-            Assert.AreEqual(actually1, expected, 0, "ABS FAILED TEST 2");
-            /*
-            if(op.Abs(num1) == 5 && op.Abs(num2) == 5) Console.WriteLine();
-            else Console.WriteLine();
-                       */
-
         }
     }
 }
