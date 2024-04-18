@@ -6,7 +6,8 @@ namespace Tests
     public class OperationsTests
     {
         [TestMethod]
-        public double AddTest()
+
+        public void AddTest()
         {
             //arrange
             var op = new Operations();
@@ -14,59 +15,143 @@ namespace Tests
             double num2 = 3;
 
             double expected = 8;
-
             //act
             op.Add(num1, num2);
-
             //assert
             double actually = op.Add(num1, num2);
-            Assert.AreEqual(expected, actually, 0, "ADD DOES NOT ADD");
-            return 0;
+            Assert.AreEqual(expected, actually, 0, "ADD DOES NOT ADD +");
+
+            //ARRANGE
+            num1 = 5;
+            num2 = 0;
+            expected = 5;
+            //ACT
+            actually = op.Add(num1, num2);
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0, "ADD FAILED TEST 0");
+
+            //ARRANGE
+            num1 = 5;
+            num2 = -3;
+            expected = 2;
+            //ACT
+            actually = op.Add(num1, num2);
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0, "ADD FAILED TEST -");
         }
         [TestMethod]
         public void SubTest()
         {
-            //arrange
+
+            //ARRANGE
+
             var op = new Operations();
             double num1 = 5;
             double num2 = 3;
             double expected = 2;
-            //act
 
-            //assert
+            //ACT
             double actually = op.Sub(num1, num2);
-            Assert.AreEqual(expected, actually, 0, "SUB FAILED TEST");
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0, "SUB FAILED TEST +");
+
+            //ARRANGE
+            num1 = 5;
+            num2 = -3;
+            expected = 8;
+            //ACT
+            actually = op.Sub(num1, num2);
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0, "SUB FAILED TEST -");
+
+            //ARRANGE
+            num1 = 5;
+            num2 = 0;
+            expected = 5;
+            //ACT
+            actually = op.Sub(num1, num2);
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0, "SUB FAILED TEST 0");
 
         }
         [TestMethod]
         public void DivTest()
         {
+            //ASSERT
             var op = new Operations();
             double num1 = 12;
             double num2 = 3;
             double expected = 4;
 
+            //ACT
             double actually = op.Div(num1, num2);
-            double difference = expected - actually;
-            Assert.AreEqual(expected, actually, 0, "DIV FAILED TEST");
-            /*if (difference < 0.1) Console.WriteLine();
-            else Console.WriteLine(difference);*/
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0, "DIV FAILED TEST +");
 
+            //ARRANGE
+            num1 = 15;
+            num2 = -3;
+            expected = -5;
+            //ACT
+            actually = op.Div(num1, num2);
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0, "DIV FAILED TEST -");
+            
+            /*
+            //ARRANGE
+            num1 = 5;
+            num2 = 0;
+            expected = 0;
+            //ACT
+            actually = op.Div(num1, num2);
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0, "DIV FAILED TEST 0");*/
         }
         [TestMethod]
         public void MulTest()
         {
+
+            //ARRANGE
+
             var op = new Operations();
             double num1 = 5;
             double num2 = 3;
             double expected = 15;
 
+            //ACT
             double actually = op.Mul(num1, num2);
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0, "MUL FAILED TEST +");
 
-            Assert.AreEqual(expected, actually, 0, "MUL FAILED TEST");
+            //ARRANGE
+            num1 = 5;
+            num2 = -3;
+            expected = -15;
+            //ACT
+            actually = op.Mul(num1, num2);
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0, "MUL FAILED TEST -");
 
-            /* if(expected == actually) Console.WriteLine();
-            else Console.WriteLine();*/
+            //ARRANGE
+            num1 = 15;
+            num2 = 0.3;
+            expected = 4.5;
+            //ACT
+            actually = op.Mul(num1, num2);
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0, "MUL FAILED TEST <1");
+
+            //ARRANGE
+            num1 = 5;
+            num2 = 0;
+            expected = 0;
+            //ACT
+            actually = op.Mul(num1, num2);
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0, "MUL FAILED TEST 0");
+
+
+
         }
         [TestMethod]
         public void ExpTest()
@@ -79,7 +164,29 @@ namespace Tests
             //ACT
             double actually = op.Exp(num1, num2);
             //ASSERT
-            Assert.AreEqual(expected, actually, 0, "EXP FAILED TEST");
+
+            Assert.AreEqual(expected, actually, 0, "EXP FAILED TEST +");
+
+            //ARRANGE
+            num1 = 5;
+            num2 = 0;
+            expected = 1;
+            //ACT
+            actually = op.Exp(num1, num2);
+
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0, "EXP FAILED TEST 0");
+
+            //ARRANGE
+            num1 = 5;
+            num2 = -3;
+            expected = 0.008;
+            //ACT
+            actually = op.Exp(num1, num2);
+
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0, "EXP FAILED TEST -");
+
         }
         [TestMethod]
         public void SqrTest()
@@ -92,7 +199,27 @@ namespace Tests
             //ACT
             double actually = op.Sqr(num1, num2);
             //ASSERT
-            Assert.AreEqual(expected, actually, 0.1, "SQR FAILED THE TEST");
+
+            Assert.AreEqual(expected, actually, 0.001, "SQR FAILED THE TEST +");
+
+            //ARRANGE
+            num1 = 5;
+            num2 = 1;
+            expected = 5;
+            //ACT
+            actually = op.Sqr(num1, num2);
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0.001, "SQR FAILED TEST 0");
+
+            //ARRANGE
+            num1 = 5;
+            num2 = 14;
+            expected = 6103515625;
+            //ACT
+            actually = op.Sqr(num1, num2);
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0, "SQR FAILED TEST +++");
+
         }
         [TestMethod]
         public void FacTest()
@@ -103,6 +230,14 @@ namespace Tests
             double expected = 120;
             //ACT
             double actually = op.Fac(num1);
+            //ASSERT
+            Assert.AreEqual(expected, actually, 0, "FAC FAILED THE TEST");
+
+            //ARRANGE
+            num1 = 14;
+            expected = 87178291200;
+            //ACT
+            actually = op.Fac(num1);
             //ASSERT
             Assert.AreEqual(expected, actually, 0, "FAC FAILED THE TEST");
 
@@ -118,8 +253,19 @@ namespace Tests
             //ACT
             double actually1 = op.Abs(num1);
             double actually2 = op.Abs(num2);
-            Assert.AreEqual(actually1, actually2, 0, "ABS FAILED TEST 1");
-            Assert.AreEqual(actually1, expected, 0, "ABS FAILED TEST 2");
+
+            //ASSERT
+            Assert.AreEqual(actually1, actually2, 0, "ABS FAILED TEST +");
+            Assert.AreEqual(actually1, expected, 0, "ABS FAILED TEST -");
+
+            //ARRANGE
+            num1 = 0;
+            expected = 0;
+            //ACT
+            actually1 = op.Fac(num1);
+            //ASSERT
+            Assert.AreEqual(expected, actually1, 0, "FAC FAILED THE TEST");
+
 
         }
     }
