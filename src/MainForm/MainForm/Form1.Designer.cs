@@ -37,6 +37,10 @@
             this.clearButton = new System.Windows.Forms.Button();
             this.operationButton_fac = new System.Windows.Forms.Button();
             this.operationButton_abs = new System.Windows.Forms.Button();
+            this.helpButton = new System.Windows.Forms.Button();
+            this.helpPanel = new System.Windows.Forms.Panel();
+            this.helpTitle = new System.Windows.Forms.Label();
+            this.helpLabel = new System.Windows.Forms.Label();
             this.operationButton_exp = new MainForm.OperationButton();
             this.operationButton_sqr = new MainForm.OperationButton();
             this.operationButton_div = new MainForm.OperationButton();
@@ -53,10 +57,6 @@
             this.numButton3 = new MainForm.NumButton();
             this.numButton2 = new MainForm.NumButton();
             this.numButton1 = new MainForm.NumButton();
-            this.helpButton = new System.Windows.Forms.Button();
-            this.helpPanel = new System.Windows.Forms.Panel();
-            this.helpLabel = new System.Windows.Forms.Label();
-            this.helpTitle = new System.Windows.Forms.Label();
             this.helpPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -140,6 +140,47 @@
             this.operationButton_abs.Text = "|x|";
             this.operationButton_abs.UseVisualStyleBackColor = true;
             this.operationButton_abs.Click += new System.EventHandler(this.AbsoluteButtonClick);
+            // 
+            // helpButton
+            // 
+            this.helpButton.BackColor = System.Drawing.Color.LemonChiffon;
+            this.helpButton.Location = new System.Drawing.Point(3, 3);
+            this.helpButton.Name = "helpButton";
+            this.helpButton.Size = new System.Drawing.Size(36, 39);
+            this.helpButton.TabIndex = 25;
+            this.helpButton.Text = "?";
+            this.helpButton.UseVisualStyleBackColor = false;
+            this.helpButton.Click += new System.EventHandler(this.helpButtonClick);
+            // 
+            // helpPanel
+            // 
+            this.helpPanel.AutoScroll = true;
+            this.helpPanel.AutoScrollMargin = new System.Drawing.Size(0, 80);
+            this.helpPanel.Controls.Add(this.helpTitle);
+            this.helpPanel.Controls.Add(this.helpLabel);
+            this.helpPanel.Location = new System.Drawing.Point(3, 48);
+            this.helpPanel.Name = "helpPanel";
+            this.helpPanel.Size = new System.Drawing.Size(436, 360);
+            this.helpPanel.TabIndex = 26;
+            this.helpPanel.Visible = false;
+            // 
+            // helpTitle
+            // 
+            this.helpTitle.AutoSize = true;
+            this.helpTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.helpTitle.Location = new System.Drawing.Point(8, 11);
+            this.helpTitle.Name = "helpTitle";
+            this.helpTitle.Size = new System.Drawing.Size(100, 22);
+            this.helpTitle.TabIndex = 1;
+            this.helpTitle.Text = "Nápověda";
+            // 
+            // helpLabel
+            // 
+            this.helpLabel.Location = new System.Drawing.Point(9, 39);
+            this.helpLabel.Name = "helpLabel";
+            this.helpLabel.Size = new System.Drawing.Size(403, 884);
+            this.helpLabel.TabIndex = 0;
+            this.helpLabel.Text = resources.GetString("helpLabel.Text");
             // 
             // operationButton_exp
             // 
@@ -316,47 +357,6 @@
             this.numButton1.Text = "1";
             this.numButton1.UseVisualStyleBackColor = true;
             this.numButton1.Click += new System.EventHandler(this.ValueButtonClick);
-            // 
-            // helpButton
-            // 
-            this.helpButton.BackColor = System.Drawing.Color.LemonChiffon;
-            this.helpButton.Location = new System.Drawing.Point(3, 3);
-            this.helpButton.Name = "helpButton";
-            this.helpButton.Size = new System.Drawing.Size(36, 39);
-            this.helpButton.TabIndex = 25;
-            this.helpButton.Text = "?";
-            this.helpButton.UseVisualStyleBackColor = false;
-            this.helpButton.Click += new System.EventHandler(this.helpButtonClick);
-            // 
-            // helpPanel
-            // 
-            this.helpPanel.AutoScroll = true;
-            this.helpPanel.AutoScrollMargin = new System.Drawing.Size(0, 80);
-            this.helpPanel.Controls.Add(this.helpTitle);
-            this.helpPanel.Controls.Add(this.helpLabel);
-            this.helpPanel.Location = new System.Drawing.Point(3, 48);
-            this.helpPanel.Name = "helpPanel";
-            this.helpPanel.Size = new System.Drawing.Size(436, 360);
-            this.helpPanel.TabIndex = 26;
-            this.helpPanel.Visible = false;
-            // 
-            // helpLabel
-            // 
-            this.helpLabel.Location = new System.Drawing.Point(9, 41);
-            this.helpLabel.Name = "helpLabel";
-            this.helpLabel.Size = new System.Drawing.Size(403, 768);
-            this.helpLabel.TabIndex = 0;
-            this.helpLabel.Text = resources.GetString("helpLabel.Text");
-            // 
-            // helpTitle
-            // 
-            this.helpTitle.AutoSize = true;
-            this.helpTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.helpTitle.Location = new System.Drawing.Point(8, 11);
-            this.helpTitle.Name = "helpTitle";
-            this.helpTitle.Size = new System.Drawing.Size(100, 22);
-            this.helpTitle.TabIndex = 1;
-            this.helpTitle.Text = "Nápověda";
             // 
             // Form1
             // 
