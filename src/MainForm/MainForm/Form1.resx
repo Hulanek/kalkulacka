@@ -117,4 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="helpLabel.Text" xml:space="preserve">
+    <value>Zadávání
+ - Klakulačka nepodporuje přednost matematických operací (tzn. kterou operaci stiskneme první, ta se první provede) 
+ - Čísla do klakulačky se zadávají pomocí tlačítek, nebo pomocí odpovídajících kláves.
+ - Pokud máme zobrazený výsledek po stisknutí rovná se. Buď můžeme pokračovat ve výpočtu zadáním další binární 
+operace, nebo začít zcela nový příklad stisknutím číselné hodnoty.
+ - Po zobrazení chyby, lze začít nový příklad stisknutím klávesy pro vynulování klakulačky, nebo stisknutím číselné hodnoty.
+
+Funkce kalkulačky
+  Plus - klávesová zkratka  +
+  Mínus - klávesová zkratka  -
+  Krát - klávesová zkratka  *
+  Děleno - klávesová zkratka  /
+  Faktoriál - klávesová zkratka  !
+     Pouze pro přirozená čísla
+  Obecná odmocnina
+     Pouze pro přirozené exponeny
+     Odchylka obecné odmocniny je jedna desetitisícina
+     Formát zadání je první číslo je exponent, druhé číslo
+     je základ
+     Např. Pokud chceme vypočítat 3 odmocninu z 27
+               1. Stiskneme 3
+               2. Stiskneme operaci odmocniny
+               3. Stiskneme 2 a 7
+               4. Stiskneme =
+  Mocnina - klávesová zkratka ^
+     Pouze pro přirozené exponenty
+     Formát zadání je první číslo je základ, druhé číslo
+     je exponent
+     Např. Pokud chceme vypočítat 2 mocninu čísla 5
+               1. Stiskneme 2
+               2. Stiskneme operaci mocniny
+               3. Stiskneme 5
+               4. Stiskneme =
+  Aboslutní hodnota
+  Změna znaménka +/-
+  Desetinná čárka - klávesová zkratka  ,
+  Mazání jedné cifry - klávesová zkratka Backspace
+  Vynulování
+  Rovná se - klávesová zkratka  =
+
+Maximální hodnota výsledku kalkulačky je 
+999 999 999 999 999
+
+Minimální hodnota výsledku klakulačky je 
+-999 999 999 999 999
+</value>
+  </data>
 </root>

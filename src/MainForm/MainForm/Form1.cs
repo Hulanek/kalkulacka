@@ -180,6 +180,14 @@ namespace MainForm
             ResetValues();
         }
 
+        /**
+        * Funkce pro detekci zmáčknutí tlačítka pro nápovědu z GUI
+        */
+        private void helpButtonClick(object sender, EventArgs e)
+        {
+            helpPanel.Visible = !helpPanel.Visible;
+        }
+
 
 
 

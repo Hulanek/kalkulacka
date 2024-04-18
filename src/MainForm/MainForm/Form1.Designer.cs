@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.mainValueBox = new System.Windows.Forms.TextBox();
             this.decPointButton = new System.Windows.Forms.Button();
             this.equalButton = new System.Windows.Forms.Button();
@@ -52,6 +53,11 @@
             this.numButton3 = new MainForm.NumButton();
             this.numButton2 = new MainForm.NumButton();
             this.numButton1 = new MainForm.NumButton();
+            this.helpButton = new System.Windows.Forms.Button();
+            this.helpPanel = new System.Windows.Forms.Panel();
+            this.helpLabel = new System.Windows.Forms.Label();
+            this.helpTitle = new System.Windows.Forms.Label();
+            this.helpPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainValueBox
@@ -311,11 +317,54 @@
             this.numButton1.UseVisualStyleBackColor = true;
             this.numButton1.Click += new System.EventHandler(this.ValueButtonClick);
             // 
+            // helpButton
+            // 
+            this.helpButton.BackColor = System.Drawing.Color.LemonChiffon;
+            this.helpButton.Location = new System.Drawing.Point(3, 3);
+            this.helpButton.Name = "helpButton";
+            this.helpButton.Size = new System.Drawing.Size(36, 39);
+            this.helpButton.TabIndex = 25;
+            this.helpButton.Text = "?";
+            this.helpButton.UseVisualStyleBackColor = false;
+            this.helpButton.Click += new System.EventHandler(this.helpButtonClick);
+            // 
+            // helpPanel
+            // 
+            this.helpPanel.AutoScroll = true;
+            this.helpPanel.AutoScrollMargin = new System.Drawing.Size(0, 80);
+            this.helpPanel.Controls.Add(this.helpTitle);
+            this.helpPanel.Controls.Add(this.helpLabel);
+            this.helpPanel.Location = new System.Drawing.Point(3, 48);
+            this.helpPanel.Name = "helpPanel";
+            this.helpPanel.Size = new System.Drawing.Size(436, 360);
+            this.helpPanel.TabIndex = 26;
+            this.helpPanel.Visible = false;
+            // 
+            // helpLabel
+            // 
+            this.helpLabel.Location = new System.Drawing.Point(9, 41);
+            this.helpLabel.Name = "helpLabel";
+            this.helpLabel.Size = new System.Drawing.Size(403, 768);
+            this.helpLabel.TabIndex = 0;
+            this.helpLabel.Text = resources.GetString("helpLabel.Text");
+            // 
+            // helpTitle
+            // 
+            this.helpTitle.AutoSize = true;
+            this.helpTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.helpTitle.Location = new System.Drawing.Point(8, 11);
+            this.helpTitle.Name = "helpTitle";
+            this.helpTitle.Size = new System.Drawing.Size(100, 22);
+            this.helpTitle.TabIndex = 1;
+            this.helpTitle.Text = "Nápověda";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(442, 410);
+            this.Controls.Add(this.helpPanel);
+            this.Controls.Add(this.helpButton);
             this.Controls.Add(this.operationButton_abs);
             this.Controls.Add(this.operationButton_fac);
             this.Controls.Add(this.clearButton);
@@ -346,6 +395,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPressEvent);
+            this.helpPanel.ResumeLayout(false);
+            this.helpPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -376,6 +427,10 @@
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button operationButton_fac;
         private System.Windows.Forms.Button operationButton_abs;
+        private System.Windows.Forms.Button helpButton;
+        private System.Windows.Forms.Panel helpPanel;
+        private System.Windows.Forms.Label helpLabel;
+        private System.Windows.Forms.Label helpTitle;
     }
 }
 
