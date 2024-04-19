@@ -1,32 +1,20 @@
 #Sample Makefile
-CSC = csc
-CSC_FLAGS = /warn:4 /optimize+ /nologo /reference:Microsoft.VisualStudio.TestTools.UnitTesting.dll #/target:4.7.2
-
-SOURCE = MainForm
-SOURCES = $(wildcard $(SOURCE)/**/*.cs)
-OUTPUT = Kalkulacka.exe
-
 ZIP = xhrdinj00_xrousja00_xhomolj00_xkonecm00
 ZIP_SCRIPT = 'Compress-Archive -Path ".." -DestinationPath "$(ZIP)"'
-CLEAN_SCRIPT = $(CURDIR)/MainForm/MainForm/bin/Debug/MainForm.exe
-ODCHYLKA = $(CURDIR)/MainForm/Odchylka/bin/Debug/net8.0
 
-SOURCE_RUN = $(wildcard *.exe)
-
-all: $(OUTPUT)
-$(OUTPUT): $(SOURCES)
-	powershell -Command "&{$(CSC) $(CSC_FLAGS) $^ -out:$@}"
+all: run
+make: 
+	powershell -Command foreach ($$file in Get-ChildItem -Path "$(CURDIR)" -Filter *.csproj -Recurse) { msbuild $$file.FullName}
 	
 pack: 
 	powershell -Command $(ZIP_SCRIPT)
 clean:
-	powershell -Command if ( Test-Path -Path $(CURDIR)/*.exe) { del	*.exe} 
-	powershell -Command if (Test-Path -Path $(CURDIR)/MainForm/MainForm/bin/Debug/*.exe) { del "$(CURDIR)\MainForm\MainForm\bin\Debug\*.exe"}
+	powershell -Command foreach ($$file in Get-ChildItem -Path "$(CURDIR)" -Filter *.exe -Recurse) { Remove-Item $$file.FullName}
 run:
-	powershell -Command  if (Test-Path -Path "$(CURDIR)/*.exe") { "& { & $(CURDIR)/*.exe }" }	elseif (Test-Path -Path $(CURDIR)/MainForm/MainForm/bin/Debug/MainForm.exe) { "& { Start-Process $(CURDIR)/MainForm/MainForm/bin/Debug/MainForm.exe }" } else { echo "ok3" }
+	powershell -Command  if (Test-Path -Path "$(CURDIR)/*.exe") { "& { & $(CURDIR)/*.exe }" }	elseif (Test-Path -Path $(CURDIR)/MainForm/MainForm/bin/Debug/MainForm.exe) { "& { Start-Process $(CURDIR)/MainForm/MainForm/bin/Debug/MainForm.exe }" } else { echo "Program nebyl sestaven ve VS a nelze spustit" }
 profile:
-	./$(ODCHYLKA)/Odchylka.exe 
+	./MainForm/Odchylka/bin/Debug/net8.0/Odchylka.exe MainForm/Odchylka/bin/Debug/net8.0/TestSoubor.txt #pokusit se zautomatizovat
 help:
 	@echo Napoveda:
-	@echo Je potreba pouzit 'make' pro prelozeni projektu a nasledene 'make run' pro spusteni
-	@echo Manualne zkompilovat program ve VS a nasledne pouzit 'make run'
+	@echo Manualne zkompilujte program ve VS a nasledne pouzit 'make run' nebo 'make'
+	@echo Pouzit prikaz 'make make' a nasledne pouzit 'make' nebo 'make run'
