@@ -10,3 +10,14 @@ C:\Users\marvi\source\repos\kalkulacka-ivs\src\MainForm\MainForm\obj\Debug\MainF
 C:\Users\marvi\source\repos\kalkulacka-ivs\src\MainForm\MainForm\obj\Debug\MainForm.exe
 C:\Users\marvi\source\repos\kalkulacka-ivs\src\MainForm\MainForm\obj\Debug\MainForm.pdb
 C:\Users\marvi\Source\Repos\kalkulacka-ivs\src\MainForm\MainForm\obj\Debug\MainForm.NumButton.resources
+C:\Users\marvi\source\repos\kakulacka-ivs\src\MainForm\MainForm\bin\Debug\MainForm.exe.config
+C:\Users\marvi\source\repos\kakulacka-ivs\src\MainForm\MainForm\bin\Debug\MainForm.exe
+C:\Users\marvi\source\repos\kakulacka-ivs\src\MainForm\MainForm\bin\Debug\MainForm.pdb
+C:\Users\marvi\source\repos\kakulacka-ivs\src\MainForm\MainForm\obj\Debug\MainForm.csproj.AssemblyReference.cache
+C:\Users\marvi\source\repos\kakulacka-ivs\src\MainForm\MainForm\obj\Debug\MainForm.Form1.resources
+C:\Users\marvi\source\repos\kakulacka-ivs\src\MainForm\MainForm\obj\Debug\MainForm.NumButton.resources
+C:\Users\marvi\source\repos\kakulacka-ivs\src\MainForm\MainForm\obj\Debug\MainForm.Properties.Resources.resources
+C:\Users\marvi\source\repos\kakulacka-ivs\src\MainForm\MainForm\obj\Debug\MainForm.csproj.GenerateResource.cache
+C:\Users\marvi\source\repos\kakulacka-ivs\src\MainForm\MainForm\obj\Debug\MainForm.csproj.CoreCompileInputs.cache
+C:\Users\marvi\source\repos\kakulacka-ivs\src\MainForm\MainForm\obj\Debug\MainForm.exe
+C:\Users\marvi\source\repos\kakulacka-ivs\src\MainForm\MainForm\obj\Debug\MainForm.pdb
