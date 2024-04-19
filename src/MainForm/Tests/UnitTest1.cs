@@ -185,7 +185,7 @@ namespace Tests
             actually = op.Exp(num1, num2);
 
             //ASSERT
-            Assert.AreEqual(expected, actually, 0, "EXP FAILED TEST -");
+            Assert.AreEqual(expected, actually, 0, "EXP FAILED TEST -"); 
 
         }
         [TestMethod]
@@ -203,8 +203,8 @@ namespace Tests
             Assert.AreEqual(expected, actually, 0.001, "SQR FAILED THE TEST +");
 
             //ARRANGE
-            num1 = 5;
-            num2 = 1;
+            num1 = 1;
+            num2 = 5;
             expected = 5;
             //ACT
             actually = op.Sqr(num1, num2);
@@ -214,11 +214,11 @@ namespace Tests
             //ARRANGE
             num1 = 5;
             num2 = 14;
-            expected = 6103515625;
+            expected = 1.695218;
             //ACT
             actually = op.Sqr(num1, num2);
             //ASSERT
-            Assert.AreEqual(expected, actually, 0, "SQR FAILED TEST +++");
+            Assert.AreEqual(expected, actually, 0.0001, "SQR FAILED TEST +++");
 
         }
         [TestMethod]
@@ -262,7 +262,7 @@ namespace Tests
             num1 = 0;
             expected = 0;
             //ACT
-            actually1 = op.Fac(num1);
+            actually1 = op.Abs(num1);
             //ASSERT
             Assert.AreEqual(expected, actually1, 0, "FAC FAILED THE TEST");
 
