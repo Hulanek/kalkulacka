@@ -1,6 +1,6 @@
 #Sample Makefile
 CSC = csc
-CSC_FLAGS = /warn:4 /optimize+ /nologo #/target:4.7.2
+CSC_FLAGS = /warn:4 /optimize+ /nologo /reference:Microsoft.VisualStudio.TestTools.UnitTesting.dll #/target:4.7.2
 
 SOURCE = MainForm
 SOURCES = $(wildcard $(SOURCE)/**/*.cs)
@@ -9,12 +9,13 @@ OUTPUT = Kalkulacka.exe
 ZIP = xhrdinj00_xrousja00_xhomolj00_xkonecm00
 ZIP_SCRIPT = 'Compress-Archive -Path ".." -DestinationPath "$(ZIP)"'
 CLEAN_SCRIPT = $(CURDIR)/MainForm/MainForm/bin/Debug/MainForm.exe
+ODCHYLKA = $(CURDIR)/MainForm/Odchylka/bin/Debug/net8.0
 
 SOURCE_RUN = $(wildcard *.exe)
 
 all: $(OUTPUT)
 $(OUTPUT): $(SOURCES)
-	$(CSC) $(CSC_FLAGS) $^ -out:$@
+	powershell -Command "&{$(CSC) $(CSC_FLAGS) $^ -out:$@}"
 	
 pack: 
 	powershell -Command $(ZIP_SCRIPT)
@@ -24,7 +25,7 @@ clean:
 run:
 	powershell -Command  if (Test-Path -Path "$(CURDIR)/*.exe") { "& { & $(CURDIR)/*.exe }" }	elseif (Test-Path -Path $(CURDIR)/MainForm/MainForm/bin/Debug/MainForm.exe) { "& { Start-Process $(CURDIR)/MainForm/MainForm/bin/Debug/MainForm.exe }" } else { echo "ok3" }
 profile:
-	
+	./$(ODCHYLKA)/Odchylka.exe 
 help:
 	@echo Napoveda:
 	@echo Je potreba pouzit 'make' pro prelozeni projektu a nasledene 'make run' pro spusteni
