@@ -1,4 +1,4 @@
-xlogin01 100 (základ GUI a základní mat. operace)
-xlogin02 100 (pokročilé mat. operace)
-xlogin03 90 (profiling, instalátor)
-xlogin04 110 (testy, dokumentace)
+xkonecm00 100 (Mat. knihovna + GUI)
+xhomolj00 100 (Makefile)
+xhrdinj00 100 (Profiling a instalátory)
+xrousja00 100 (Testy a dokumentace)
