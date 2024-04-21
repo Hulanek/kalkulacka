@@ -1,0 +1,18 @@
+Název týmu: Lorem ipsum
+Členové týmu: Jan Hrdina(xhrdinj00), Jan Homolka(xhomolj00), Jan Rous(xrousja00), Martin Konečný(xkonecm00)
+
+
+Jako komunační prostředky jsme zvolili Discord a Slack. Slack jsme zvolili kvůli jeho možnosti užití GitHub appu, kde lze sledovat commity a issues, použití Slacku budeme směřovat spíše k věcné konverzaci. Discord budeme využívat jakožto "chatovací" komunikační prostředek.
+Deadliny různých části projektu budeme nastavovat až při běhu projektu, přičemž za nedodržení deadlinu bude člen penalizován 5% dolů z celkového příjmu bodů. Dále jsme zvolili cestu podobnou SCRUM metodice. Budeme se scházet jednou týdně a budeme zde vyhodnocovat odvedenou práci, tato schůzka bude sloužit také pro týmový code review. Jako vývojové prostředí jsme zvolili Visual Studio a programovací jazyk C#(.net).
+
+Pro verzování projektu budeme používat GIT.
+https://github.com/Hulanek/kalkulacka.git   - je cesta do našeho veřejného repozitáře.
+
+
+Strukturu projektu a jejich řešitele jsme rozdělili takto:
+GUI a Implementace mat. operací - xkonecm00 do 24.3
+Makefile -  			  xhomolj00  průběžně
+Profiling a instalátory -      	  xhrdinj00 do 31.3
+Testy a dokumentace -		  xrousja00 do 7.4.
+
+Pozn.: plán se ještě může v průběhu lehce měnit.17:48 13.03.2024
