@@ -94,7 +94,7 @@ namespace Odchylka
                 double x_line = operation.Mul(operation.Div(1, num_length), sum_num);
                 double s_deleni = operation.Div(1, operation.Sub(num_length, 1));
                // pred a po odmocnine
-                double before_sqrt = operation.Mul(s_deleni, Stddev.Sum_square(numbers, x_line);
+                double before_sqrt = operation.Mul(s_deleni, Stddev.Sum_square(numbers, x_line));
                 double after_sqrt = operation.Sqr(2,before_sqrt);
                 Console.WriteLine(after_sqrt);
                
