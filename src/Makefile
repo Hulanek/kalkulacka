@@ -3,12 +3,13 @@ NAME = xhrdinj00_xrousja00_xhomolj00_xkonecm00
 ZIP = $(NEW_DIR_2)/$(NAME)
 ZIP_SCRIPT = 'Compress-Archive -Path "$$HOME/source/$(NAME)" -DestinationPath "$(ZIP)"'
 $(eval NEW_DIR_2 = $(shell powershell -Command "(Get-Item -Path (Split-Path -Path (Split-Path -Path $$PWD -Parent) -Parent)).FullName"))
-$(eval NEW_DIR = $(shell powershell -Command "(Get-Item -Path  (Split-Path -Path $$PWD -Parent)).FullName"))
-
+$(eval NEW_DIR = $(shell powershell -Command "(Get-Item -Path (Split-Path -Path $$PWD -Parent)).FullName"))
+MSBUILD_PATH = $(shell powershell -Command "(Get-ChildItem -Path 'C:\' -Filter 'msbuild.exe' -Recurse -File | Select-Object -First 1 | Select-Object -ExpandProperty FullName)")
 
 all: run
 make: 
-	powershell -Command foreach ($$file in Get-ChildItem -Path "$(CURDIR)" -Filter *.csproj -Recurse) { msbuild $$file.FullName}
+	
+	powershell -Command foreach ($$file in Get-ChildItem -Path "$(CURDIR)" -Filter *.csproj -Recurse) {  "& '$(MSBUILD_PATH)' $$file.FullName" }
 	
 pack: 
 	$(MAKE) clean
@@ -31,5 +32,5 @@ profile:
 	./MainForm/Odchylka/bin/Debug/net8.0/Odchylka.exe MainForm/Odchylka/bin/Debug/net8.0/TestSoubor.txt 
 help:
 	@echo Napoveda:
-	@echo Manualne zkompilujte program ve VS a nasledne pouzit 'make run' nebo 'make'
-	@echo Pouzit prikaz 'make make' a nasledne pouzit 'make' nebo 'make run'
+	@echo Manualne zkompilujte program ve VS a nasledne pouzit 'make run' nebo 'make' pro spusteni kalkulacky
+	@echo Pouzit prikaz 'make make' a nasledne pouzit 'make' nebo 'make run' pro spusteni kalkulacky
