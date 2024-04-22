@@ -5,7 +5,7 @@ ZIP_SCRIPT = 'Compress-Archive -Path "$$HOME/source/$(NAME)" -DestinationPath "$
 $(eval NEW_DIR_2 = $(shell powershell -Command "(Get-Item -Path (Split-Path -Path (Split-Path -Path $$PWD -Parent) -Parent)).FullName"))
 $(eval NEW_DIR = $(shell powershell -Command "(Get-Item -Path (Split-Path -Path $$PWD -Parent)).FullName"))
 MSBUILD_PATH = $(shell powershell -Command "(Get-ChildItem -Path 'C:\' -Filter 'msbuild.exe' -Recurse -File | Select-Object -First 1 | Select-Object -ExpandProperty FullName)")
-as='C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe'
+
 all: run
 make: 
 	
