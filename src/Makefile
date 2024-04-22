@@ -11,6 +11,7 @@ make:
 	powershell -Command foreach ($$file in Get-ChildItem -Path "$(CURDIR)" -Filter *.csproj -Recurse) { msbuild $$file.FullName}
 	
 pack: 
+	$(MAKE) clean
 	powershell -Command "New-Item -ItemType Directory -Path "$(NEW_DIR_2)" -Name "$(NAME)" "
 	powershell -Command "New-Item -ItemType Directory -Path "$(NEW_DIR_2)/$(NAME)" -Name "repo" "
 	powershell -Command "Copy-Item -Path "$(NEW_DIR)/*"  -Destination "$(NEW_DIR_2)/$(NAME)/repo" -Recurse"
