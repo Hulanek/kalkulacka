@@ -1,8 +1,9 @@
 #Sample Makefile
 NAME = xhrdinj00_xrousja00_xhomolj00_xkonecm00
-ZIP = $$HOME/source/$(NAME)
+ZIP = $(NEW_DIR_2)/$(NAME)
 ZIP_SCRIPT = 'Compress-Archive -Path "$$HOME/source/$(NAME)" -DestinationPath "$(ZIP)"'
-
+$(eval NEW_DIR_2 = $(shell powershell -Command "(Get-Item -Path (Split-Path -Path (Split-Path -Path $$PWD -Parent) -Parent)).FullName"))
+$(eval NEW_DIR = $(shell powershell -Command "(Get-Item -Path  (Split-Path -Path $$PWD -Parent)).FullName"))
 
 
 all: run
@@ -10,16 +11,16 @@ make:
 	powershell -Command foreach ($$file in Get-ChildItem -Path "$(CURDIR)" -Filter *.csproj -Recurse) { msbuild $$file.FullName}
 	
 pack: 
-	powershell -Command "New-Item -ItemType Directory -Path "$$HOME/source" -Name "$(NAME)" "
-	powershell -Command "New-Item -ItemType Directory -Path "$$HOME/source/$(NAME)" -Name "repo" "
-	powershell -Command "Copy-Item -Path "$$HOME/source/killed/*"  -Destination "$$HOME/source/$(NAME)/repo" -Recurse"
-	powershell -Command "New-Item -ItemType Directory -Path "$$HOME/source/$(NAME)" -Name "doc" "
-	powershell -Command "New-Item -ItemType Directory -Path "$$HOME/source/$(NAME)" -Name "install" " 
-	powershell -Command "Get-Item -Path "$$HOME/source/$(NAME)/repo/instalacka.exe" | Move-Item  -Destination "$$HOME/source/$(NAME)/install"  "
-	powershell -Command "Get-Item -Path "$$HOME/source/$(NAME)/repo/instalacka_odchylky.exe" | Move-Item  -Destination "$$HOME/source/$(NAME)/install"
-	powershell -Command "Get-ChildItem -Path "$$HOME/source/$(NAME)/repo/dokumentace.*" | Move-Item  -Destination "$$HOME/source/$(NAME)/doc"
+	powershell -Command "New-Item -ItemType Directory -Path "$(NEW_DIR_2)" -Name "$(NAME)" "
+	powershell -Command "New-Item -ItemType Directory -Path "$(NEW_DIR_2)/$(NAME)" -Name "repo" "
+	powershell -Command "Copy-Item -Path "$(NEW_DIR)/*"  -Destination "$(NEW_DIR_2)/$(NAME)/repo" -Recurse"
+	powershell -Command "New-Item -ItemType Directory -Path "$(NEW_DIR_2)/$(NAME)" -Name "doc" "
+	powershell -Command "New-Item -ItemType Directory -Path "$(NEW_DIR_2)/$(NAME)" -Name "install" " 
+	powershell -Command "Get-Item -Path "$(NEW_DIR_2)/$(NAME)/repo/instalacka.exe" | Move-Item  -Destination "$(NEW_DIR_2)/$(NAME)/install"  "
+	powershell -Command "Get-Item -Path "$(NEW_DIR_2)/$(NAME)/repo/instalacka_odchylky.exe" | Move-Item  -Destination "$(NEW_DIR_2)/$(NAME)/install"
+	powershell -Command "Get-ChildItem -Path "$(NEW_DIR_2)/$(NAME)/repo/dokumentace.*" | Move-Item  -Destination "$(NEW_DIR_2)/$(NAME)/doc"
 	powershell -Command $(ZIP_SCRIPT)
-	powershell -Command  Remove-Item -Path "$$HOME/source/$(NAME)" -Recurse -Force"
+	powershell -Command  Remove-Item -Path "$(NEW_DIR_2)/$(NAME)" -Recurse -Force"
 
 clean:
 	powershell -Command foreach ($$file in Get-ChildItem -Path "$(CURDIR)" -Filter *.exe -Recurse) { Remove-Item $$file.FullName}
