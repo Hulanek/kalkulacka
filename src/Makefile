@@ -29,7 +29,7 @@ clean:
 run:
 	powershell -Command  if (Test-Path -Path "$(CURDIR)/*.exe") { "& { & $(CURDIR)/*.exe }" }	elseif (Test-Path -Path $(CURDIR)/MainForm/MainForm/bin/Debug/MainForm.exe) { "& { Start-Process $(CURDIR)/MainForm/MainForm/bin/Debug/MainForm.exe }" } else { echo 'Program nebyl sestaven ve VS, nebo pomoci ''make make'' a nelze spustit' }
 profile:
-	./MainForm/Odchylka/bin/Debug/net8.0/Odchylka.exe MainForm/Odchylka/bin/Debug/net8.0/TestSoubor.txt 
+	./MainForm/stddev/bin/Debug/net8.0/Stddev.exe MainForm/stddev/bin/Debug/net8.0/TestSoubor.txt 
 help:
 	@echo Napoveda:
 	@echo Manualne zkompilujte program ve VS a nasledne pouzit 'make run' nebo 'make' pro spusteni kalkulacky
