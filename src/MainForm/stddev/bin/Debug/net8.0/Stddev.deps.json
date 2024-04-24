@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Stddev/1.0.0": {
+        "dependencies": {
+          "Operace": "1.0.0"
+        },
+        "runtime": {
+          "Stddev.dll": {}
+        }
+      },
+      "Operace/1.0.0": {
+        "runtime": {
+          "Operace.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Stddev/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Operace/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
