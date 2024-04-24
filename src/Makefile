@@ -1,7 +1,7 @@
 #Sample Makefile
 NAME = xhrdinj00_xrousja00_xhomolj00_xkonecm00
 ZIP = $(NEW_DIR_2)/$(NAME)
-ZIP_SCRIPT = 'Compress-Archive -Path "$$HOME/source/$(NAME)" -DestinationPath "$(ZIP)"'
+ZIP_SCRIPT = 'Compress-Archive -Path "$(NEW_DIR_2)/$(NAME)" -DestinationPath "$(ZIP)"'
 $(eval NEW_DIR_2 = $(shell powershell -Command "(Get-Item -Path (Split-Path -Path (Split-Path -Path $$PWD -Parent) -Parent)).FullName"))
 $(eval NEW_DIR = $(shell powershell -Command "(Get-Item -Path (Split-Path -Path $$PWD -Parent)).FullName"))
 MSBUILD_PATH = $(shell powershell -Command "(Get-ChildItem -Path 'C:\' -Filter 'msbuild.exe' -Recurse -File | Select-Object -First 1 | Select-Object -ExpandProperty FullName)")
