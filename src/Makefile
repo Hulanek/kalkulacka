@@ -20,7 +20,8 @@ pack:
 	powershell -Command "New-Item -ItemType Directory -Path "$(NEW_DIR_2)/$(NAME)" -Name "install" " 
 	powershell -Command "Get-Item -Path "$(NEW_DIR_2)/$(NAME)/repo/instalacka.exe" | Move-Item  -Destination "$(NEW_DIR_2)/$(NAME)/install"  "
 	powershell -Command "Get-Item -Path "$(NEW_DIR_2)/$(NAME)/repo/instalacka_odchylky.exe" | Move-Item  -Destination "$(NEW_DIR_2)/$(NAME)/install"
-	powershell -Command "Get-ChildItem -Path "$(NEW_DIR_2)/$(NAME)/repo/dokumentace.*" | Move-Item  -Destination "$(NEW_DIR_2)/$(NAME)/doc"
+	powershell -Command "Get-ChildItem -Path "$(NEW_DIR_2)/$(NAME)/repo/Dokumentace" | Move-Item  -Destination "$(NEW_DIR_2)/$(NAME)/doc"
+	powershell -Command "Remove-Item -Path "$(NEW_DIR_2)/$(NAME)/repo/Dokumentace" 
 	powershell -Command $(ZIP_SCRIPT)
 	powershell -Command  Remove-Item -Path "$(NEW_DIR_2)/$(NAME)" -Recurse -Force"
 
